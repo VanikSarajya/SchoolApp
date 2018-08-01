@@ -1,10 +1,14 @@
 import React from "react";
-import ReactDOM from "react-dom"
-import Login from './components/Login'
+import ReactDOM from "react-dom";
+import {Provider} from 'react-redux';
+import App from './containers/App';
+import store from './store';
 import "./index.css";
 
 
 ReactDOM.render(
-    <Login />,
-    document.getElementById('login')
+    <Provider store={store}>
+        <App />
+    </Provider>,
+    document.getElementById('root')
 )
