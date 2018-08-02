@@ -17,11 +17,9 @@ export const loginReducer = (state = initialState, action) => {
             return state;
             break;
         case "LOGIN":
-            if (email == "vaniksarajyan@gmail.com" && password == "12345678"){
-                state = {
-                    ...state,
-                    loggedIn: true
-                }
+            state={
+                ...state,
+                loggedIn:action.loggedIn 
             }
             return state;
             break;

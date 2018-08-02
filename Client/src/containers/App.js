@@ -4,20 +4,19 @@ import { Link, Redirect,BrowserRouter as Router, Route, Switch } from 'react-rou
 import Login from './Login';
 import {Error} from '../components/Error';
 import {Home} from '../components/Home';
-import {Navbar} from '../components/Navbar'
 export class App extends React.Component {
     render(){
         return (
             <Router>
                 <div>
-                    <Navbar />
                     <Switch>
                         <Route path ="/" exact render={() =>(
                             this.props.loggedIn ? (<Home/>) : (<Redirect to="login"/>)
                         )
 
                         }/>
-                        <Route path="/login" component={Login}/>
+                        <Route  path="/login" render={() => (
+                        this.props.loggedIn ? (<Home/>) : (<Login/>))}/>
                         <Route component={Error}/>
                     </Switch>
                 </div>

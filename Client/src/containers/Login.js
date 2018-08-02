@@ -7,7 +7,7 @@ export class Login extends React.Component {
     render() {
         return(
             <div className="form">  
-                <form onSubmit={login(this.props.email,this.props.password)}>
+                <form onSubmit={(e)=>{e.preventDefault();this.props.login(this.props.email,this.props.password)}}>
                     <div className="form-group">
                         <label>
                             Email adress
@@ -21,7 +21,7 @@ export class Login extends React.Component {
                         <input className="form-control" type="password" name="password" onChange={this.props.handleChange}  value={this.props.password} placeholder="Password"/>
                     </div>
                     <input className="btn btn-primary" disabled={!isValid(this.props.email,this.props.password)} type="submit" value="Log-In" />
-                </form>  
+                </form> 
             </div>
         );
     }
@@ -40,6 +40,9 @@ const mapDispatchToProps = (dispatch) => {
         handleChange: (event) => {
             dispatch(change(event));
         },
+        login: (email,password) => {
+            dispatch(login(email,password));
+        }
     }
 
 }

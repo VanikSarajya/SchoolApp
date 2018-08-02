@@ -1,7 +1,7 @@
 const express = require('express');
 
-const basicRoute = require('./routes/route');
-
+const loginRoute = require('./routes/loginroute');
+require('dotenv').config()
 
 const app = express();
 
@@ -14,12 +14,9 @@ app.use((req,res,next) => {
 	next();
 })
 
-app.post('/',(req,res) => {
-    
-})
+app.use('/admin', loginRoute);
 
-
-const port = 3001;
+const port = process.env.PORT;
 app.listen(port, () => {
     console.log(`Server started on port ${port}`);
 })

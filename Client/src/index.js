@@ -4,6 +4,7 @@ import {Provider} from 'react-redux';
 import App from './containers/App';
 import store from './store';
 import "./index.css";
+window.axios=require('axios');
 
 
 ReactDOM.render(
