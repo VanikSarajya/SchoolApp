@@ -1,13 +1,18 @@
 import React from 'react';
-import {Navbar} from './Navbar';
+import {Link} from 'react-router-dom';
+import '../assets/styles/home.css';
 
 export class Home extends React.Component {
     render(){
         return (
-            <div>
-                <Navbar />
-                <h1> HOME </h1>
-            </div>    
+            <div className="home">
+                <div className="header">
+                    <h1>Welcome</h1>
+                    <div className="bar">
+                        <Link to="/login">Login as Admin</Link>
+                    </div>
+                </div>    
+            </div>
         );
     }
 }

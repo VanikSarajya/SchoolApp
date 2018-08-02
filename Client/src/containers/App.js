@@ -4,19 +4,22 @@ import { Link, Redirect,BrowserRouter as Router, Route, Switch } from 'react-rou
 import Login from './Login';
 import {Error} from '../components/Error';
 import {Home} from '../components/Home';
+import {Admin} from '../components/Admin';
+import {Classes} from './Classes';
 export class App extends React.Component {
     render(){
         return (
             <Router>
                 <div>
                     <Switch>
-                        <Route path ="/" exact render={() =>(
-                            this.props.loggedIn ? (<Home/>) : (<Redirect to="login"/>)
+                        <Route path="/" exact component={Home}/>
+                        <Route path ="/admin" exact render={() =>(
+                            this.props.loggedIn ? (<Admin/>) : (<Redirect to="login"/>)
                         )
 
                         }/>
                         <Route  path="/login" render={() => (
-                        this.props.loggedIn ? (<Home/>) : (<Login/>))}/>
+                        this.props.loggedIn ? (<Redirect to="/admin"/>) : (<Login/>))}/>
                         <Route component={Error}/>
                     </Switch>
                 </div>

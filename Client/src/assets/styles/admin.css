@@ -1,0 +1,64 @@
+.admin {
+    display: flex;
+    flex-direction: row;
+}
+.logo {
+    width: 100px;
+    height: 100px;
+    margin-top: 20px;
+    border-radius: 10px;
+    margin-left: 72px;
+}
+ul {
+    list-style: none;
+    padding: 10px 0 10px 0;
+}
+
+.bar {
+    background-color: white;
+    border-radius: 10px;
+    height: 40px;
+    width: 220px;
+    margin: 10px;
+    display: flex;
+    justify-content: center;
+    line-height: 40px;
+    font-size: 18px;
+    font-weight: bold;
+    opacity: 0.96;
+}
+
+.bar:hover {
+    opacity: 1;
+    color: black;
+    font-size: 20px;
+
+}
+.content {
+    display: flex;
+    justify-content: center;
+    background-color:whitesmoke;
+    width: 1000px;
+    border-radius: 10px;
+    margin: 5px 5px 5px 270px;
+}
+a {
+    text-decoration: none;
+    color: black;
+}
+a:hover, a:active {
+    text-decoration: none;
+    color:black;
+}
+.sidebar {
+    width: 250px;
+    background-color: black;
+    margin: 5px;
+    border-width: 10px;
+    border-color: black;
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    position: fixed;
+    height: 100%;
+}

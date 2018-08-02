@@ -1,4 +1,5 @@
 import axios from "axios";
+import isEmail from 'validator/lib/isEmail';
 export function change(event){
     return {
         type: "CHANGE",
@@ -20,5 +21,5 @@ export function login(email,password){
 }
 
 export function isValid(email, password) {
-    return (email.length >= 6 && email.length<=45 && password.length>=6);
+    return (isEmail(email) && password.length>=6);
 }
