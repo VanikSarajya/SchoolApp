@@ -32,10 +32,10 @@ export class Login extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        email:state.email,
-        password:state.password,
-        loggedIn:state.loggedIn,
-        message: state.message
+        email:state.loginReducer.email,
+        password:state.loginReducer.password,
+        loggedIn:state.loginReducer.loggedIn,
+        message: state.loginReducer.message
     };
 }
 

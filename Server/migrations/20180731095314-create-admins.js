@@ -18,8 +18,16 @@ module.exports = {
         allowNull: false,
         defaultValue: false
       },
-      createdAt: Sequelize.DATE,
-      uptadetAt: Sequelize.DATE
+      createdAt: {
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
+        allowNull: false
+      },
+      uptadetAt: { 
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
+        allowNull: false
+      }
     });
   },
   down: (queryInterface, Sequelize) => {

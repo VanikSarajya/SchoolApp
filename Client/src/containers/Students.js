@@ -9,3 +9,4 @@ export class Students extends React.Component {
         );
     }
 }
+export default Students;

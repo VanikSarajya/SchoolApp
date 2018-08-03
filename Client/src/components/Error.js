@@ -5,3 +5,5 @@ export const Error = () => {
         <p> This path does not exist </p>
     );
 }
+
+export default Error;

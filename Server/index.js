@@ -1,6 +1,6 @@
 const express = require('express');
 
-const loginRoute = require('./routes/loginroute');
+const adminRoute = require('./routes/adminroute');
 require('dotenv').config()
 
 const app = express();
@@ -14,7 +14,7 @@ app.use((req,res,next) => {
 	next();
 })
 
-app.use('/admin', loginRoute);
+app.use('/admin', adminRoute);
 
 const port = process.env.PORT;
 app.listen(port, () => {
