@@ -17,13 +17,13 @@ export class App extends React.Component {
                 <div>
                     <Switch>
                         <Route path="/" exact component={Home}/>
-                        <Route path ="/admin" exact render={() =>(
+                        <Route path ="/admin" render={() =>(
                             this.props.loggedIn ? (<Admin/>) : (<Redirect to="/login"/>)
                         )
 
                         }/>
                         <Route  path="/login" render={() => (
-                        this.props.loggedIn ? (<Redirect to="/admin"/>) : (<Login/>))}/>
+                        this.props.loggedIn ? (<Redirect to="/admin/classes"/>) : (<Login/>))}/>
                         <Route component={Error}/>
                     </Switch>
                 </div>
