@@ -1,7 +1,8 @@
 const initialState = {
     email: "",
     password: "",
-    loggedIn: false
+    loggedIn: false,
+    message: ""
 }
 
 export const loginReducer = (state = initialState, action) => {
@@ -17,9 +18,11 @@ export const loginReducer = (state = initialState, action) => {
             return state;
             break;
         case "LOGIN":
+            const {message} = action;
             state={
                 ...state,
-                loggedIn:action.loggedIn 
+                loggedIn:action.loggedIn,
+                message
             }
             return state;
             break;

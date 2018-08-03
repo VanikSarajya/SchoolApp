@@ -9,3 +9,9 @@
     margin-top: 60px;
     border-radius: 20px;
 }
+.message {
+    margin: 10px;
+    font-size: 15px;
+    font-weight: 400;
+    color: red;
+}

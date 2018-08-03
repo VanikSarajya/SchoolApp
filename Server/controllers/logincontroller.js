@@ -7,11 +7,13 @@ exports.login = function (req,res) {
         if (results == null){
             res.json({
                 logged: false,
+                message: "Wrong email or password"
             });
         } else if (Object.keys(results).length>0){
             if(results.password === password){
                 res.json({
                     logged: true,
+                    message: "Success"
                 });
             }
         }

@@ -11,10 +11,12 @@ export function login(email,password){
     return async (dispatch) => {
         const response = await axios.post("http://localhost:3001/admin",{email,password});
         const logged= await response.data.logged;
-
+        const message = await response.data.message;
+        
         dispatch({
             type: "LOGIN",
-            loggedIn:logged
+            loggedIn:logged,
+            message
         })
 
     }
