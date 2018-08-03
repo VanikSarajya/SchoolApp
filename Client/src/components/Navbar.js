@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import image from '../assets/pictures/logo.png'
+import {connect} from 'react-redux';
+import image from '../assets/pictures/logo.png';
+import {logout} from '../actions/loginaction';
 
 export class Navbar extends React.Component {
     render() {
@@ -18,6 +20,9 @@ export class Navbar extends React.Component {
                         <div className="bar">
                             <li><Link to="/admin/teachers">Teachers</Link></li>
                         </div>
+                        <div className="bar">
+                            <li><a href="/" onClick={logout}>Log out</a></li>
+                        </div>
                     </ul>
                 </div>
             </nav>
@@ -25,3 +30,4 @@ export class Navbar extends React.Component {
     }
 }
 
+export default Navbar;

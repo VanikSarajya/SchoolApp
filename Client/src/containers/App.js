@@ -6,7 +6,11 @@ import {Error} from '../components/Error';
 import {Home} from '../components/Home';
 import {Admin} from '../components/Admin';
 import {Classes} from './Classes';
+import { authenticate } from '../actions/loginaction';
 export class App extends React.Component {
+    componentWillMount() {
+        this.props.authenticate(localStorage.getItem('jwtToken'));
+    }
     render(){
         return (
             <Router>
@@ -14,7 +18,7 @@ export class App extends React.Component {
                     <Switch>
                         <Route path="/" exact component={Home}/>
                         <Route path ="/admin" exact render={() =>(
-                            this.props.loggedIn ? (<Admin/>) : (<Redirect to="login"/>)
+                            this.props.loggedIn ? (<Admin/>) : (<Redirect to="/login"/>)
                         )
 
                         }/>
@@ -32,4 +36,11 @@ const mapStateToProps = (state) => {
         loggedIn: state.loggedIn
     }
 }
-export default connect(mapStateToProps)(App);
+const mapDispatchToProps = (dispatch) => {
+    return {
+        authenticate: (token) => {
+            dispatch(authenticate(token));
+        }
+    }
+}
+export default connect(mapStateToProps,mapDispatchToProps)(App);

@@ -21,10 +21,16 @@ export const loginReducer = (state = initialState, action) => {
             const {message} = action;
             state={
                 ...state,
-                loggedIn:action.loggedIn,
                 message
             }
             return state;
+        case "AUTHENTICATE":
+            const {answer, error} = action;
+            state = {
+                ...state,
+                loggedIn:answer,
+            } 
+            return state;   
             break;
         default: 
             return state;    

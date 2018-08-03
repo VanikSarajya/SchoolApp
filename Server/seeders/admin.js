@@ -1,10 +1,11 @@
 'use strict';
+require('dotenv').config();
 
 module.exports = {
     up: (queryInterface, Sequelize) => {
         return queryInterface.bulkInsert('admins',[{
             email: "vaniksarajyan@gmail.com",
-            password: "12345678"
+            password: process.env.ADMIN_PASSWORD
         }], {});
     },
     down: (queryInterface, Sequelize) => {
