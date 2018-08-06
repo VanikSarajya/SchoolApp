@@ -8,7 +8,7 @@ export class Login extends React.Component {
         return(
             <div className="main">
                 <div className="form">  
-                    <form onSubmit={()=>{this.props.login(this.props.email,this.props.password);}}>
+                    <form onSubmit={()=>{ this.props.login(this.props.email,this.props.password);}}>
                         <div className="form-group">
                             <label>
                                 Email adress
@@ -32,10 +32,10 @@ export class Login extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        email:state.email,
-        password:state.password,
-        loggedIn:state.loggedIn,
-        message: state.message
+        email:state.loginReducer.email,
+        password:state.loginReducer.password,
+        loggedIn:state.loginReducer.loggedIn,
+        message: state.loginReducer.message
     };
 }
 

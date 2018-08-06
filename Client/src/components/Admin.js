@@ -1,9 +1,9 @@
 import React from 'react';
-import { Link, Redirect,BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import {Navbar} from './Navbar';
-import {Classes} from '../containers/Classes';
-import {Teachers} from '../containers/Teachers';
-import {Students} from '../containers/Students';
+import {BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import Navbar from './Navbar';
+import Classes from '../containers/Classes';
+import Teachers from '../containers/Teachers';
+import Students from '../containers/Students';
 import '../assets/styles/admin.css';
 
 export class Admin extends React.Component {
@@ -42,3 +42,5 @@ export class Admin extends React.Component {
         );
     }
 }
+
+export default Admin;

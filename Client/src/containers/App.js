@@ -1,11 +1,10 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import { Link, Redirect,BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { Redirect,BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Login from './Login';
-import {Error} from '../components/Error';
-import {Home} from '../components/Home';
-import {Admin} from '../components/Admin';
-import {Classes} from './Classes';
+import Error from '../components/Error';
+import Home from '../components/Home';
+import Admin from '../components/Admin';
 import { authenticate } from '../actions/loginaction';
 export class App extends React.Component {
     componentWillMount() {
@@ -17,13 +16,13 @@ export class App extends React.Component {
                 <div>
                     <Switch>
                         <Route path="/" exact component={Home}/>
-                        <Route path ="/admin" exact render={() =>(
+                        <Route path ="/admin" render={() =>(
                             this.props.loggedIn ? (<Admin/>) : (<Redirect to="/login"/>)
                         )
 
                         }/>
                         <Route  path="/login" render={() => (
-                        this.props.loggedIn ? (<Redirect to="/admin"/>) : (<Login/>))}/>
+                        this.props.loggedIn ? (<Redirect to="/admin/classes"/>) : (<Login/>))}/>
                         <Route component={Error}/>
                     </Switch>
                 </div>
@@ -33,7 +32,7 @@ export class App extends React.Component {
 }
 const mapStateToProps = (state) => {
     return {
-        loggedIn: state.loggedIn
+        loggedIn: state.loginReducer.loggedIn
     }
 }
 const mapDispatchToProps = (dispatch) => {

@@ -9,4 +9,6 @@ export class Classes extends React.Component {
         );
     }
 }
+
+export default Classes;
  
