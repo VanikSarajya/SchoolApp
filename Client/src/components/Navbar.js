@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import {connect} from 'react-redux';
 import image from '../assets/pictures/logo.png';
 import {logout} from '../actions/loginaction';
 

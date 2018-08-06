@@ -6,9 +6,8 @@ const teacherController = require('../controllers/teachercontroller')
 router.post('/', loginController.login);
 router.post('/auth', loginController.authenticate);
 router.get('/teachers', teacherController.get);
-/*
-router.post('/teacher',)
-router.put('/teacher', )
-router.delete('/teacher', )
-*/
+router.post('/teachers', teacherController.add);
+router.put('/teachers', teacherController.edit);
+router.delete('/teachers', teacherController.delete);
+
 module.exports = router;

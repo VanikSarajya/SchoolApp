@@ -8,7 +8,7 @@ export class Login extends React.Component {
         return(
             <div className="main">
                 <div className="form">  
-                    <form onSubmit={()=>{this.props.login(this.props.email,this.props.password);}}>
+                    <form onSubmit={()=>{ this.props.login(this.props.email,this.props.password);}}>
                         <div className="form-group">
                             <label>
                                 Email adress

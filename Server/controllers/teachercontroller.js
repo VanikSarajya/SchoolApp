@@ -15,3 +15,33 @@ exports.get = function (req,res){
         throw err;
     })
 }
+
+exports.add = function (req,res) {
+    const {firstName,lastName} = req.body;
+    teachers.create({firstName : firstName, lastName: lastName }).then((newTeacher)=>
+        res.json({
+            message: "Teacher successfully added!",
+            newTeacher
+        })
+    );
+}
+
+exports.edit = function (req,res) {
+    const {id, firstName, lastName} = req.body;
+    teachers.update(
+        {firstName: firstName, lastName:lastName},
+        {where: {id:id}}
+    ).then(
+        res.json({
+            message: "Teacher successfully updated!"
+        })
+    );
+}
+
+exports.delete = function (req,res) {
+    teachers.destroy({where : {id: req.body.id}}).then(
+        res.json({
+            message: `Teacher successfully deleted!`
+        })
+    );
+}
