@@ -16,5 +16,8 @@ router.delete('/classes', classController.delete);
 router.post('/classes', classController.add);
 router.put('/classes', classController.edit);
 router.get('/students', studentController.get);
+router.post('/students', studentController.add);
+router.delete('/students', studentController.delete);
+router.put('/students', studentController.edit);
 
 module.exports = router;
