@@ -1,5 +1,6 @@
 'use strict';
 require('dotenv').config();
+const {admins} = require('../models/index');
 
 module.exports = {
     up: (queryInterface, Sequelize) => {
@@ -9,6 +10,6 @@ module.exports = {
         }], {});
     },
     down: (queryInterface, Sequelize) => {
-        return queryInterface.bulkDelete('admins',null, {});
+        return admins.destroy({where: {email: "vaniksarajyan@gmail.com"}});
     }
 }
