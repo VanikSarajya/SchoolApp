@@ -36,5 +36,6 @@ db.Sequelize = Sequelize;
 db.admins = require('./admins')(sequelize, Sequelize);
 db.teachers = require('./teachers')(sequelize, Sequelize);
 db.classes = require('./classes')(sequelize, Sequelize);
+db.students = require('./students')(sequelize, Sequelize);
 
 module.exports = db;

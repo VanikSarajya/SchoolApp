@@ -48,10 +48,10 @@ export class ClassItem extends React.Component {
                         <div className="modal-body">
                             <form>
                                 Name
-                                <input type="text" name="name" onChange={this.props.handleChange} value={this.props.name}  className="form-control"/>
+                                <input type="text" name="name" onChange={this.props.handleChange} value={this.props.name} placeholder={this.props.class.name} className="form-control"/>
                                 Teacher
                                 <select name="teacherId" value={this.props.teacherId} onChange={this.props.handleChange} className="form-control">
-                                    <option>Select Teacher ID</option>
+                                    <option>{this.props.class.id}</option>
                                     {this.props.teachers.map((teacher, index) => {
                                         return (
                                             <option> {teacher.id}</option>
