@@ -5,7 +5,7 @@ module.exports = (sequelize, DataTypes) => {
     teacherId: DataTypes.INTEGER
   }, {timestamps: false});
   classes.associate = function(models) {
-    classes.belongsTo('teachers',{foreignKey:'teacherId', targetKey:'id'});
+    classes.belongsTo(models.teachers,{foreignKey:'teacherId', targetKey:'id'});
   };
   return classes;
 };
