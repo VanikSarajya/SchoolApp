@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {getClasses, deleteClass, addClass ,editClass} from '../actions/classaction';
+import {getTeachers} from '../actions/teacheraction';
 import ClassItem from '../components/ClassItem';
 
 export class Classes extends React.Component {
@@ -19,9 +20,33 @@ export class Classes extends React.Component {
             [name]: value
         })
     }
+    inputValidation(name, teacher){
+        return (name.length>=2 && name.length<=10) && (teacher.length>0);
+    }
+
     componentWillMount(){   
         this.props.getClasses();
+        this.props.getTeachers();
     }
+
+    getOnlyFreeTeachers(teachers,classes){
+        const freeTeachers = [];
+        if(teachers && classes){
+            for (let i=0; i < teachers.length; ++i){
+                var matched = false;
+                for(let j=0; j < classes.length; ++j){
+                    if(teachers[i].id == classes[j].teacherId){
+                        matched = true;
+                    }
+                }
+                if(!matched){
+                    freeTeachers.push(teachers[i]);
+                }
+            }
+        }
+        return freeTeachers;
+    }
+    
     render () {
         return (
             <div className="classes">
@@ -32,7 +57,7 @@ export class Classes extends React.Component {
                         <tr>
                             <th>#</th>
                             <th>Name</th>
-                            <th>Teacher Id</th>
+                            <th>Teacher</th>
                             <th> Actions </th>
                         </tr>
                     </thead>
@@ -48,6 +73,9 @@ export class Classes extends React.Component {
                                     name = {this.state.name}
                                     teacherId = {this.state.teacherId}
                                     teachers = {this.props.teachers}
+                                    classes= {this.props.classes}
+                                    getOnlyFreeTeachers = {this.getOnlyFreeTeachers}
+                                    inputValidation = {this.inputValidation}
                                 />
                             );    
                         })}
@@ -66,17 +94,17 @@ export class Classes extends React.Component {
                                 <input type="text" name="name" onChange={this.handleChange} value={this.state.name}  className="form-control"/>
                                 Teacher
                                 <select name="teacherId" value={this.state.teacherId} onChange={this.handleChange} className="form-control">
-                                    <option>Select Teacher ID</option>
-                                    {this.props.teachers.map((teacher,index) => {
+                                    <option>Select Teacher</option>
+                                    {this.getOnlyFreeTeachers(this.props.teachers,this.props.classes).map((teacher,index) => {
                                         return (
-                                            <option> {teacher.id}</option>
+                                            <option value={teacher.id}> {teacher.firstName} {teacher.lastName}</option>
                                         );
                                     })}
                                 </select>
                             </form>
                         </div>
                         <div className="modal-footer">
-                            <button type="button" onClick={()=> this.props.addClass(this.state.name, this.state.teacherId)} className="btn btn-primary"  data-dismiss="modal" > Add </button>
+                            <button type="button" disabled={!this.inputValidation(this.state.name,this.state.teacherId)} onClick={()=> this.props.addClass(this.state.name, this.state.teacherId)} className="btn btn-primary"  data-dismiss="modal" > Add </button>
                             <button type="button" className="btn btn-default" data-dismiss="modal">Cancel</button>
                         </div>
                         </div>
@@ -108,6 +136,9 @@ const mapDispatchToProps = (dispatch) => {
         },
         handleEdit: (id,name, teacherId) => {
             dispatch(editClass(id ,name, teacherId));
+        },
+        getTeachers: () => {
+            dispatch(getTeachers());
         }
     }
 }

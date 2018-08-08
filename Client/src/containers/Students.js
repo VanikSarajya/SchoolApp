@@ -10,14 +10,16 @@ export class Students extends React.Component {
         this.state = {
             firstName: "",
             lastName: "",
-            classId: null,
+            classId: "",
         }
         this.handleChange = this.handleChange.bind(this);
     }
     componentWillMount(){
         this.props.getStudents();
     }
-
+    inputValidation (firstName, lastName, clas) {
+        return (firstName.length>=3 && firstName.length<=60) && (lastName.length>=3 && lastName.length<=60) && clas.length>0;
+    }
     handleChange(event) {
         const target = event.target;
         const {name,value} = target;
@@ -36,7 +38,7 @@ export class Students extends React.Component {
                             <th>#</th>
                             <th>First Name</th>
                             <th>Last Name</th>
-                            <th>Class ID</th>
+                            <th>Class</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -53,6 +55,7 @@ export class Students extends React.Component {
                                     firstName = {this.state.firstName}
                                     lastName = {this.state.lastName}
                                     classId = {this.state.classId}
+                                    inputValidation = {this.inputValidation}
                                 />
                             );    
                         })}
@@ -76,14 +79,14 @@ export class Students extends React.Component {
                                     <option>Select Class </option>
                                     {this.props.classes.map((clas,index) => {
                                         return (
-                                            <option> {clas.id}</option>
+                                            <option value={clas.id}> {clas.name}</option>
                                         );
                                     })}
                                 </select>
                             </form>
                         </div>
                         <div className="modal-footer">
-                            <button type="button" onClick={()=> this.props.addStudent(this.state.firstName,this.state.lastName, this.state.classId)}className="btn btn-primary"  data-dismiss="modal" > Add </button>
+                            <button type="button" disabled={!this.inputValidation(this.state.firstName,this.state.lastName,this.state.classId)} onClick={()=> this.props.addStudent(this.state.firstName,this.state.lastName, this.state.classId)}className="btn btn-primary"  data-dismiss="modal" > Add </button>
                             <button type="button" className="btn btn-default" data-dismiss="modal">Cancel</button>
                         </div>
                         </div>

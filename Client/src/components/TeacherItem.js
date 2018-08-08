@@ -53,7 +53,7 @@ export  class TeacherItem extends React.Component {
                                 </form>
                             </div>
                             <div className="modal-footer">
-                                <button type="button" className="btn btn-primary" data-dismiss="modal" 
+                                <button type="button" disabled={!this.props.inputValidation(this.props.firstName,this.props.lastName)}className="btn btn-primary" data-dismiss="modal" 
                                 onClick={() => this.props.handleEdit(this.props.firstName, this.props.lastName, this.props.teacher.id)}> Edit </button>
                                 <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
                             </div>

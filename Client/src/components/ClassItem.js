@@ -1,15 +1,22 @@
 import React from 'react';
 
 export class ClassItem extends React.Component {
-    constructor(){
-        super();
+    getTeacherNameFromClass(clas){
+        if(this.props.teachers){
+            const teachers = this.props.teachers;
+            for(let i=0; teachers && i < teachers.length; ++i){
+                if (clas.teacherId == teachers[i].id){
+                    return teachers[i].firstName + " " + teachers[i].lastName;
+                }
+            }
+        }
     }
     render(){
         return (
             <tr> 
                 <td> {this.props.class.id} </td>
                 <td> {this.props.class.name} </td>
-                <td> {this.props.class.teacherId} </td>
+                <td> {this.getTeacherNameFromClass(this.props.class)} </td>
                 <td> <button 
                         className="btn btn-primary"
                         data-toggle="modal"
@@ -51,10 +58,10 @@ export class ClassItem extends React.Component {
                                 <input type="text" name="name" onChange={this.props.handleChange} value={this.props.name} placeholder={this.props.class.name} className="form-control"/>
                                 Teacher
                                 <select name="teacherId" value={this.props.teacherId} onChange={this.props.handleChange} className="form-control">
-                                    <option>{this.props.class.id}</option>
-                                    {this.props.teachers.map((teacher, index) => {
+                                    <option>{this.getTeacherNameFromClass(this.props.class)}</option>
+                                    {this.props.getOnlyFreeTeachers(this.props.teachers,this.props.classes).map((teacher, index) => {
                                         return (
-                                            <option> {teacher.id}</option>
+                                            <option value={teacher.id}> {teacher.firstName} {teacher.lastName}</option>
                                         );
                                         
                                     })}
@@ -62,7 +69,7 @@ export class ClassItem extends React.Component {
                             </form>
                         </div>
                         <div className="modal-footer">
-                            <button type="button" onClick={()=> this.props.handleEdit(this.props.class.id, this.props.name, this.props.teacherId)} className="btn btn-primary"  data-dismiss="modal" > Edit </button>
+                            <button type="button" disabled={!this.props.inputValidation(this.props.name,this.props.teacherId)} onClick={()=> this.props.handleEdit(this.props.class.id, this.props.name, this.props.teacherId)} className="btn btn-primary"  data-dismiss="modal" > Edit </button>
                             <button type="button" className="btn btn-default" data-dismiss="modal">Cancel</button>
                         </div>
                         </div>
