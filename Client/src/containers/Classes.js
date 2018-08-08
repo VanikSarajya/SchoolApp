@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {getClasses, deleteClass, addClass ,editClass} from '../actions/classaction';
+import {getTeachers} from '../actions/teacheraction';
 import ClassItem from '../components/ClassItem';
 
 export class Classes extends React.Component {
@@ -21,6 +22,7 @@ export class Classes extends React.Component {
     }
     componentWillMount(){   
         this.props.getClasses();
+        this.props.getTeachers();
     }
     render () {
         return (
@@ -32,7 +34,7 @@ export class Classes extends React.Component {
                         <tr>
                             <th>#</th>
                             <th>Name</th>
-                            <th>Teacher Id</th>
+                            <th>Teacher</th>
                             <th> Actions </th>
                         </tr>
                     </thead>
@@ -66,10 +68,10 @@ export class Classes extends React.Component {
                                 <input type="text" name="name" onChange={this.handleChange} value={this.state.name}  className="form-control"/>
                                 Teacher
                                 <select name="teacherId" value={this.state.teacherId} onChange={this.handleChange} className="form-control">
-                                    <option>Select Teacher ID</option>
+                                    <option>Select Teacher</option>
                                     {this.props.teachers.map((teacher,index) => {
                                         return (
-                                            <option> {teacher.id}</option>
+                                            <option value={teacher.id}> {teacher.firstName} {teacher.lastName}</option>
                                         );
                                     })}
                                 </select>
@@ -108,6 +110,9 @@ const mapDispatchToProps = (dispatch) => {
         },
         handleEdit: (id,name, teacherId) => {
             dispatch(editClass(id ,name, teacherId));
+        },
+        getTeachers: () => {
+            dispatch(getTeachers());
         }
     }
 }

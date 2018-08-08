@@ -1,13 +1,23 @@
 import React from 'react';
 
 export class ClassItem extends React.Component {
+    getClassNameFromStudent(student){
+        if(this.props.classes){
+            const {classes} = this.props;
+            for(let i=0; classes && i <  classes.length; ++i){
+                if (student.classId == classes[i].id){
+                    return classes[i].name;
+                }
+            }
+        }
+    }
     render(){
         return (
             <tr> 
                 <td> {this.props.student.id} </td>
                 <td> {this.props.student.firstName} </td>
                 <td> {this.props.student.lastName} </td>
-                <td> {this.props.student.classId} </td>
+                <td> {this.getClassNameFromStudent(this.props.student)} </td>
                 <td> <button 
                         className="btn btn-primary"
                         data-toggle="modal"
@@ -52,10 +62,10 @@ export class ClassItem extends React.Component {
                                 <input type="text" name="lastName" onChange={this.props.handleChange} value={this.props.lastName}  placeholder={this.props.student.lastName} className="form-control"/>
                                 Select Class
                                 <select name="classId" value={this.props.classId} onChange={this.props.handleChange}  className="form-control">
-                                    <option>{this.props.student.classId}</option>
+                                    <option>{this.getClassNameFromStudent(this.props.student)}</option>
                                     {this.props.classes.map((clas, index) => {
                                         return (
-                                            <option> {clas.id}</option>
+                                            <option value={clas.id}> {clas.name}</option>
                                         );
                                         
                                     })}

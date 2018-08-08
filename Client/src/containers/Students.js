@@ -36,7 +36,7 @@ export class Students extends React.Component {
                             <th>#</th>
                             <th>First Name</th>
                             <th>Last Name</th>
-                            <th>Class ID</th>
+                            <th>Class</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -76,7 +76,7 @@ export class Students extends React.Component {
                                     <option>Select Class </option>
                                     {this.props.classes.map((clas,index) => {
                                         return (
-                                            <option> {clas.id}</option>
+                                            <option value={clas.id}> {clas.name}</option>
                                         );
                                     })}
                                 </select>
