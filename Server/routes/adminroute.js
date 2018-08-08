@@ -4,6 +4,7 @@ const loginController = require('../controllers/logincontroller');
 const teacherController = require('../controllers/teachercontroller');
 const classController = require('../controllers/classcontroller');
 const studentController = require('../controllers/studentcontroller');
+const courseController = require('../controllers/coursecontroller');
 
 router.post('/', loginController.login);
 router.post('/auth', loginController.authenticate);
@@ -19,5 +20,6 @@ router.get('/students', studentController.get);
 router.post('/students', studentController.add);
 router.delete('/students', studentController.delete);
 router.put('/students', studentController.edit);
+router.get('/courses', courseController.get);
 
 module.exports = router;
