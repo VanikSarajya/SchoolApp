@@ -1,4 +1,5 @@
 const {students} = require('../models/index');
+const {classes} = require('../models/index');
 
 exports.get = function (req,res){
     students.findAll().then(results => {

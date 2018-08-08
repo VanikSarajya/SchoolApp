@@ -7,6 +7,9 @@ export class Teachers extends React.Component {
     componentWillMount(){
         this.props.getTeachers();
     }
+    inputValidation(firstName,lastName){
+        return (firstName.length>=3 && firstName.length<=80) && (lastName.length>=3 && lastName.length<=80);
+    }
     render () {
         return (
             <div className="teachers">
@@ -32,6 +35,7 @@ export class Teachers extends React.Component {
                                     handleChange = {this.props.handleChange}
                                     firstName = {this.props.firstName}
                                     lastName = {this.props.lastName}
+                                    inputValidation = {this.inputValidation}
                                 />
                             );    
                         })}
@@ -55,7 +59,7 @@ export class Teachers extends React.Component {
                         </form>
                     </div>
                     <div className="modal-footer">
-                        <button type="button" className="btn btn-primary" onClick={() => this.props.addTeacher(this.props.firstName,this.props.lastName)} data-dismiss="modal" > Add </button>
+                        <button type="button" disabled={!this.inputValidation(this.props.firstName,this.props.lastName)} className="btn btn-primary" onClick={() => this.props.addTeacher(this.props.firstName,this.props.lastName)} data-dismiss="modal" > Add </button>
                         <button type="button" className="btn btn-default" data-dismiss="modal">Cancel</button>
                     </div>
                     </div>

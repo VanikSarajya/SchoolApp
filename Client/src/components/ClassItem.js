@@ -59,7 +59,7 @@ export class ClassItem extends React.Component {
                                 Teacher
                                 <select name="teacherId" value={this.props.teacherId} onChange={this.props.handleChange} className="form-control">
                                     <option>{this.getTeacherNameFromClass(this.props.class)}</option>
-                                    {this.props.teachers.map((teacher, index) => {
+                                    {this.props.getOnlyFreeTeachers(this.props.teachers,this.props.classes).map((teacher, index) => {
                                         return (
                                             <option value={teacher.id}> {teacher.firstName} {teacher.lastName}</option>
                                         );
@@ -69,7 +69,7 @@ export class ClassItem extends React.Component {
                             </form>
                         </div>
                         <div className="modal-footer">
-                            <button type="button" onClick={()=> this.props.handleEdit(this.props.class.id, this.props.name, this.props.teacherId)} className="btn btn-primary"  data-dismiss="modal" > Edit </button>
+                            <button type="button" disabled={!this.props.inputValidation(this.props.name,this.props.teacherId)} onClick={()=> this.props.handleEdit(this.props.class.id, this.props.name, this.props.teacherId)} className="btn btn-primary"  data-dismiss="modal" > Edit </button>
                             <button type="button" className="btn btn-default" data-dismiss="modal">Cancel</button>
                         </div>
                         </div>

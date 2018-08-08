@@ -7,6 +7,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {timestamps:false});
   students.associate = function(models) {
     // associations can be defined here
+    students.belongsTo(models.classes, {foreignKey: "classId", targetKey: "id"});
   };
   return students;
 };
