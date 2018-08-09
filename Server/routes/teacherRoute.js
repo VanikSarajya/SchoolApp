@@ -4,8 +4,9 @@ const router = express.Router();
 const teacherController = require('../controllers/teacherController');
 
 router.get('/', teacherController.get);
-router.post('/', teacherController.add);
-router.put('/', teacherController.edit);
-router.delete('/', teacherController.delete);
+router.get('/:id',teacherController.getOne)
+router.post('/add', teacherController.add);
+router.put('/edit/:id', teacherController.edit);
+router.delete('/:id', teacherController.delete);
 
 module.exports = router;

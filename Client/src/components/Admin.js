@@ -6,6 +6,8 @@ import Teachers from '../containers/Teachers';
 import Students from '../containers/Students';
 import Courses from '../containers/Courses';
 import AddCourse from '../containers/AddCourse';
+import TeacherAdd from '../containers/TeacherAdd';
+import TeacherEdit from '../containers/TeacherEdit';
 import '../assets/styles/admin.css';
 
 export class Admin extends React.Component {
@@ -16,43 +18,17 @@ export class Admin extends React.Component {
                     <div className="sidebar">
                         <Navbar />
                     </div>
-                    <Switch>
-                        <Route path="/admin/classes" component={ () => {
-                            return (
-                                <div className="content">
-                                    <Classes />
-                                </div>
-                            );
-                        }}/> 
-                        <Route path="/admin/students" component={ () => {
-                            return (
-                                <div className="content">
-                                    <Students />
-                                </div>
-                            );
-                        }}/>
-                        <Route path="/admin/teachers" component={ () => {
-                            return (
-                                <div className="content">
-                                    <Teachers />
-                                </div>
-                            );
-                        }}/>
-                        <Route path="/admin/courses" exact component={ () => {
-                            return (
-                                <div className="content">
-                                    <Courses />
-                                </div>
-                            );
-                        }}/>
-                        <Route path="/admin/courses/add" component={() => {
-                            return (
-                                <div className="content">
-                                    <AddCourse />
-                                </div>    
-                            );
-                        }} />
-                    </Switch>  
+                    <div className="content">
+                        <Switch>
+                            <Route path="/admin/classes" component={Classes}/> 
+                            <Route path="/admin/students" component={Students}/>
+                            <Route path="/admin/teachers" exact component={Teachers}/>
+                            <Route path="/admin/teachers/add" component={TeacherAdd} />
+                            <Route path="/admin/teachers/edit/:id" exact component={TeacherEdit}/>
+                            <Route path="/admin/courses" exact component={Courses} />
+                            <Route path="/admin/courses/add" component={AddCourse} />
+                        </Switch> 
+                    </div> 
                 </div>       
             </Router>           
         );
