@@ -11,6 +11,8 @@ module.exports = (sequelize, DataTypes) => {
   }, {timestamps:false});
   courses.associate = function(models) {
     // associations can be defined here
+    courses.belongsTo(models.teachers);
+    courses.belongsTo(models.classes);
   };
   return courses;
 };

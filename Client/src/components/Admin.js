@@ -20,13 +20,13 @@ export class Admin extends React.Component {
                     </div>
                     <div className="content">
                         <Switch>
-                            <Route path="/admin/classes" component={Classes}/> 
-                            <Route path="/admin/students" component={Students}/>
+                            <Route path="/admin/classes" exact component={Classes}/> 
+                            <Route path="/admin/students" exact component={Students}/>
                             <Route path="/admin/teachers" exact component={Teachers}/>
-                            <Route path="/admin/teachers/add" component={TeacherAdd} />
+                            <Route path="/admin/teachers/add" exact component={TeacherAdd} />
                             <Route path="/admin/teachers/edit/:id" exact component={TeacherEdit}/>
                             <Route path="/admin/courses" exact component={Courses} />
-                            <Route path="/admin/courses/add" component={AddCourse} />
+                            <Route path="/admin/courses/add" exact component={AddCourse} />
                         </Switch> 
                     </div> 
                 </div>       

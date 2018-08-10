@@ -1,8 +1,13 @@
-const {students} = require('../models/index');
-const {classes} = require('../models/index');
+const models = require('../models');
+
 
 exports.get = function (req,res){
-    students.findAll().then(results => {
+    models.students.findAll({
+        include: [{
+            model: models.classes,
+            required: true
+        }]
+    }).then(results => {
         if(results == null){
             res.json({
                 message: "There are no students"
@@ -19,7 +24,7 @@ exports.get = function (req,res){
 
 exports.add = function (req,res) {
     const {firstName, lastName, classId} = req.body;
-    students.create({firstName, lastName, classId }).then((newStudent)=>
+    models.students.create({firstName, lastName, classId }).then((newStudent)=>
         res.json({
             message: "Student successfully added!",
             newStudent
@@ -28,7 +33,7 @@ exports.add = function (req,res) {
 }
 
 exports.delete = function (req,res) {
-    students.destroy({where : {id: req.body.id}}).then(
+    models.students.destroy({where : {id: req.body.id}}).then(
         res.json({
             message: `Student successfully deleted!`
         })
@@ -37,7 +42,7 @@ exports.delete = function (req,res) {
 
 exports.edit = function (req,res) {
     const {id, firstName, lastName, classId} = req.body;
-    students.update(
+    models.students.update(
         {firstName, lastName, classId},
         {where: {id}}
     ).then(

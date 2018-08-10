@@ -23,7 +23,7 @@ export class Teachers extends React.Component {
                         </tr>
                     </thead>
                     <tbody>
-                        {this.props.teachers.map((teacher, index) => {
+                        {this.props.teachers.map((teacher) => {
                             return (
                                 <TeacherItem 
                                     key={teacher.id}

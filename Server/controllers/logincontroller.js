@@ -1,11 +1,11 @@
-const {admins} = require('../models/index');
+const models = require('../models');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 require('dotenv').config();
 
 exports.login = function (req,res) {
     const {email,password} = req.body;
-    admins.findOne({where : {email: email}})
+    models.admins.findOne({where : {email: email}})
     .then((results) => {
         if (results == null){
             res.json({

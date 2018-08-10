@@ -1,8 +1,12 @@
-const {classes} = require('../models/index');
-const {teachers} = require('../models/index');
+const models = require('../models');
 
 exports.get = function (req,res){
-    classes.findAll().then(results => {
+    models.classes.findAll({
+        include: [{
+            model: models.teachers,
+            required: true
+        }]
+    }).then(results => {
         if(results == null){
             res.json({
                 message: "There are no classes"
@@ -18,7 +22,7 @@ exports.get = function (req,res){
 }
 
 exports.delete = function (req,res) {
-    classes.destroy({where : {id: req.body.id}}).then(
+    models.classes.destroy({where : {id: req.body.id}}).then(
         res.json({
             message: `Class successfully deleted!`
         })
@@ -27,7 +31,7 @@ exports.delete = function (req,res) {
 
 exports.add = function (req,res) {
     const {name, teacherId} = req.body;
-    classes.create({name : name, teacherId: teacherId }).then((newClass)=>
+    models.classes.create({name : name, teacherId: teacherId }).then((newClass)=>
         res.json({
             message: "Class successfully added!",
             newClass
@@ -37,7 +41,7 @@ exports.add = function (req,res) {
 
 exports.edit = function (req,res) {
     const {id, name, teacherId} = req.body;
-    classes.update(
+    models.classes.update(
         {name, teacherId},
         {where: {id}}
     ).then(
