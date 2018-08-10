@@ -1,6 +1,7 @@
 const initialState = {
     classes: [],
-    message: ""
+    message: "",
+    currentClass: null
 }
 
 export const classReducer  = (state = initialState, action) => {
@@ -13,52 +14,47 @@ export const classReducer  = (state = initialState, action) => {
                 classes
             }
             return state;
-            break;
         }
-        case "DELETE_CLASS":{
-            const deleteMessage = action.message;
-            const clas = action.clas;
-
-            const classes = [...state.classes];
-            classes.splice(classes.indexOf(clas),1);
-            
-            state ={
+        case "GET_CLASS": {
+            const {clas} = action;
+            state = {
                 ...state,
-                message:deleteMessage,
-                classes
+                currentClass: clas
             }
-            return state;
-            break;
+            return state
         }
-        case "ADD_CLASS":{
-            const addMessage = action.message;
-            const newClass = action.newClass;
-            const classes = [...state.classes, newClass];
-            state ={
-                ...state,
-                message: addMessage,
-                classes
-            }
-            return state;
-            break;
-        }
-        case "EDIT_CLASS":{
-            const {message,id,name, teacherId} = action;
-            const classes = [...state.classes];
-            const currentClass = classes.find((currentClass) => {
-                return currentClass.id == id;
-            })
-
-            classes[classes.indexOf(currentClass)].name = name;
-            classes[classes.indexOf(currentClass)].teacherId = teacherId;
+        case "CLEAR_CURRENT_CLASS":{
+            const currentClass = null;
 
             state = {
                 ...state,
-                classes,
+                currentClass
+            }
+            return state;
+        }
+        case "DELETE_CLASS":{
+            const deleteMessage = action.message;            
+            state ={
+                ...state,
+                message:deleteMessage,
+            }
+            return state;
+        }
+        case "ADD_CLASS":{
+            const addMessage = action.message;
+            state ={
+                ...state,
+                message: addMessage,
+            }
+            return state;
+        }
+        case "EDIT_CLASS":{
+            const {message} = action;
+            state = {
+                ...state,
                 message
             }
             return state;
-            break;
         }
         default:
             return state;

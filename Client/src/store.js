@@ -1,6 +1,6 @@
 import {loginReducer} from './reducers/loginreducer';
 import {teacherReducer} from './reducers/teacherReducer';
-import {classReducer} from './reducers/classreducer';
+import {classReducer} from './reducers/classReducer';
 import {studentReducer} from './reducers/studentreducer';
 import {courseReducer} from './reducers/coursereducer';
 import {createStore ,applyMiddleware, combineReducers} from 'redux';

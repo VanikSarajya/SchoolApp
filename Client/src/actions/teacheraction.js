@@ -8,8 +8,7 @@ export function deleteTeacher(teacher) {
         const {message} = await response.data;
         dispatch({
             type: "DELETE_TEACHER",
-            message,
-            teacher
+            message
         })
         dispatch(getTeachers());
     }

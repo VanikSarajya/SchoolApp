@@ -21,8 +21,24 @@ exports.get = function (req,res){
     })
 }
 
+exports.getOne = function(req,res){
+    models.classes.findById(req.params.id,{include: [{model:models.teachers, required:true}]}).then((clas) =>{
+        if(clas == null){
+            res.json({
+                message: "There is no class with this ID"
+            })
+        } else {
+            res.json({
+                clas
+            })
+        }
+    }).catch((err) => {
+        throw err;
+    })
+}
+
 exports.delete = function (req,res) {
-    models.classes.destroy({where : {id: req.body.id}}).then(
+    models.classes.destroy({where : {id: req.params.id}}).then(
         res.json({
             message: `Class successfully deleted!`
         })
@@ -31,19 +47,18 @@ exports.delete = function (req,res) {
 
 exports.add = function (req,res) {
     const {name, teacherId} = req.body;
-    models.classes.create({name : name, teacherId: teacherId }).then((newClass)=>
+    models.classes.create({name, teacherId }).then(()=>
         res.json({
             message: "Class successfully added!",
-            newClass
         })
     );
 }
 
 exports.edit = function (req,res) {
-    const {id, name, teacherId} = req.body;
+    const { name, teacherId} = req.body;
     models.classes.update(
         {name, teacherId},
-        {where: {id}}
+        {where: {id: req.params.id}}
     ).then(
         res.json({
             message: "Class successfully updated!"
