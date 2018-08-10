@@ -17,7 +17,8 @@ exports.login = function (req,res) {
                     id: results.id
                 }, process.env.JWT_SECRET , {expiresIn : 3 * 60 * 60});
                 res.json({
-                    token
+                    token,
+                    admin: results
                 });
             }
         }

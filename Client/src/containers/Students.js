@@ -1,31 +1,13 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import {Link} from 'react-router-dom';
 
-import {getStudents, addStudent, deleteStudent, editStudent} from '../actions/studentactions';
+import {getStudents, addStudent, deleteStudent, editStudent} from '../actions/studentActions';
 import StudentItem from '../components/StudentItem';
 
 export class Students extends React.Component {
-    constructor(props){
-        super(props);
-        this.state = {
-            firstName: "",
-            lastName: "",
-            classId: "",
-        }
-        this.handleChange = this.handleChange.bind(this);
-    }
-    componentWillMount(){
+    componentDidMount(){
         this.props.getStudents();
-    }
-    inputValidation (firstName, lastName, clas) {
-        return (firstName.length>=3 && firstName.length<=60) && (lastName.length>=3 && lastName.length<=60) && clas.length>0;
-    }
-    handleChange(event) {
-        const target = event.target;
-        const {name,value} = target;
-        this.setState({
-            [name]: value
-        })
     }
     render () {
         return (
@@ -43,55 +25,18 @@ export class Students extends React.Component {
                         </tr>
                     </thead>
                     <tbody>
-                        {this.props.students.map((student, index) => {
+                        {this.props.students.map((student) => {
                             return (
                                 <StudentItem 
-                                    key = {index}
+                                    key = {student.id}
                                     student = {student}
-                                    classes = {this.props.classes}
                                     handleDelete = {this.props.handleDelete}
-                                    handleEdit = {this.props.handleEdit}
-                                    handleChange = {this.handleChange}
-                                    firstName = {this.state.firstName}
-                                    lastName = {this.state.lastName}
-                                    classId = {this.state.classId}
-                                    inputValidation = {this.inputValidation}
                                 />
                             );    
                         })}
                     </tbody>
                 </table>
-                <button data-toggle="modal" data-target="#addStudent" type="button" className="btn btn-success">Add Student</button>
-                <div id="addStudent" className="modal fade" role="dialog">
-                    <div className="modal-dialog">
-                        <div className="modal-content">
-                        <div className="modal-header">
-                            <h4 className="modal-title">Adding Student</h4>
-                        </div>
-                        <div className="modal-body">
-                            <form>
-                                First Name
-                                <input type="text" name="firstName" onChange={this.handleChange} value={this.state.firstName}  className="form-control"/>
-                                Last Name
-                                <input type="text" name="lastName" onChange={this.handleChange} value={this.state.lastName}  className="form-control"/>
-                                Class 
-                                <select name="classId" value={this.state.classId} onChange={this.handleChange} className="form-control">
-                                    <option>Select Class </option>
-                                    {this.props.classes.map((clas,index) => {
-                                        return (
-                                            <option value={clas.id}> {clas.name}</option>
-                                        );
-                                    })}
-                                </select>
-                            </form>
-                        </div>
-                        <div className="modal-footer">
-                            <button type="button" disabled={!this.inputValidation(this.state.firstName,this.state.lastName,this.state.classId)} onClick={()=> this.props.addStudent(this.state.firstName,this.state.lastName, this.state.classId)}className="btn btn-primary"  data-dismiss="modal" > Add </button>
-                            <button type="button" className="btn btn-default" data-dismiss="modal">Cancel</button>
-                        </div>
-                        </div>
-                    </div>
-                </div>
+                <Link to='/admin/students/add'><button type="button" className="btn btn-success">Add Student</button></Link>
             </div>
         );
     }
@@ -110,16 +55,9 @@ const mapDispatchToProps = (dispatch) => {
         getStudents: () => {
             dispatch(getStudents());
         },
-        addStudent : (firstName, lastName, classId) => {
-            dispatch(addStudent(firstName,lastName,classId));
-        },
         handleDelete: (student) => {
             dispatch(deleteStudent(student));
-        },
-        handleEdit : (id,firstName,lastName,classId) => {
-            dispatch(editStudent(id, firstName,lastName, classId));
-        }
-        
+        }        
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Students);

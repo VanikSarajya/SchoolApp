@@ -1,6 +1,7 @@
 const initialState = {
     students: [],
-    message: ""
+    message: "",
+    currentStudent: null
 }
 
 export const studentReducer = (state=initialState, action) => {
@@ -14,44 +15,45 @@ export const studentReducer = (state=initialState, action) => {
             }
             return state;
         }
-        case "ADD_STUDENT": {
-            const {newStudent,message} = action;
-            const students = [...state.students, newStudent];
+        case "GET_STUDENT":{
+            const {student} = action;
 
             state = {
                 ...state,
-                students,
+                currentStudent: student
+            }
+            return state;
+        }
+        case "CLEAR_CURRENT_STUDENT":{
+            const currentStudent = null;
+
+            state = {
+                ...state,
+                currentStudent
+            }
+            return state;
+        }
+        case "ADD_STUDENT": {
+            const {message} = action;
+            state = {
+                ...state,
                 message
             }
             return state;
         }
         case "DELETE_STUDENT":{
-            const {student,message} = action;
+            const {message} = action;
 
-            const students = [...state.students];
-            students.splice(students.indexOf(student),1);
             state ={
                 ...state,
                 message,
-                students
             }
             return state;
         }
         case "EDIT_STUDENT":{
-            const {message,id,firstName, lastName, classId} = action;
-            const students = [...state.students];
-            const student = students.find((currentStudent) => {
-                return currentStudent.id == id;
-            })
-
-            students[students.indexOf(student)].firstName = firstName;
-            students[students.indexOf(student)].lastName = lastName;
-            students[students.indexOf(student)].classId = classId;
-
-
+            const {message} = action;
             state = {
                 ...state,
-                students,
                 message
             }
             return state;

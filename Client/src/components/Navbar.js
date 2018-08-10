@@ -8,7 +8,11 @@ export class Navbar extends React.Component {
         return (
             <nav>
                 <div>
-                    <img className="logo" src={image}/> 
+                    <img className="logo" src={image}/>
+                    <div className = "admin-info" > 
+                        <h6> {this.props.firstName} {this.props.lastName} </h6>
+                        <p> {this.props.email}</p>
+                    </div> 
                     <ul>
                         <div className="bar">
                             <li><Link to="/admin/classes">Classes</Link></li>

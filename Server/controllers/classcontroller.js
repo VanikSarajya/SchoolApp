@@ -5,7 +5,10 @@ exports.get = function (req,res){
         include: [{
             model: models.teachers,
             required: true
-        }]
+        }],
+        order: [
+            ['name', 'DESC']
+        ]
     }).then(results => {
         if(results == null){
             res.json({

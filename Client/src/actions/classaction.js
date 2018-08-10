@@ -15,7 +15,7 @@ export function getClasses(){
 export function getClass(id){
     return async (dispatch) => {
         const response = await axios.get(process.env.REACT_APP_SERVER_URL+ `/admin/classes/${id}`);
-        const {clas} = await response.data;
+        const {clas} = response.data;
 
         dispatch({
             type: 'GET_CLASS',

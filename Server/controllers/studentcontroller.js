@@ -22,6 +22,22 @@ exports.get = function (req,res){
     })
 }
 
+exports.getOne = function(req,res){
+    models.students.findById(req.params.id,{include: [{model:models.classes, required:true}]}).then((student) =>{
+        if(student == null){
+            res.json({
+                message: "There is no student with this ID"
+            })
+        } else {
+            res.json({
+                student
+            })
+        }
+    }).catch((err) => {
+        throw err;
+    })
+}
+
 exports.add = function (req,res) {
     const {firstName, lastName, classId} = req.body;
     models.students.create({firstName, lastName, classId }).then((newStudent)=>
@@ -33,7 +49,7 @@ exports.add = function (req,res) {
 }
 
 exports.delete = function (req,res) {
-    models.students.destroy({where : {id: req.body.id}}).then(
+    models.students.destroy({where : {id: req.params.id}}).then(
         res.json({
             message: `Student successfully deleted!`
         })
@@ -41,10 +57,10 @@ exports.delete = function (req,res) {
 }
 
 exports.edit = function (req,res) {
-    const {id, firstName, lastName, classId} = req.body;
+    const { firstName, lastName, classId} = req.body;
     models.students.update(
         {firstName, lastName, classId},
-        {where: {id}}
+        {where: {id:req.params.id}}
     ).then(
         res.json({
             message: "Class successfully updated!"
