@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {getCourses} from '../actions/courseaction';
-import CourseItem from '../components/CourseItem';
+import {getCourses} from '../../actions/courseAction';
+import CourseItem from '../../components/CourseComponents/CourseItem';
 import {Link} from 'react-router-dom';
 
 export class Courses extends React.Component {

@@ -1,6 +1,7 @@
 const initialState = {
     courses: [],
-    message: ""
+    message: "",
+    currentCourse: null
 }
 
 

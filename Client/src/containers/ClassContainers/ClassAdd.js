@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import ClassForm from '../components/ClassForm';
-import { addClass } from '../actions/classAction';
+import ClassForm from '../../components/ClassComponents/ClassForm';
+import { addClass } from '../../actions/classAction';
 
 export class ClassAdd extends React.Component {
     render(){

@@ -1,17 +1,18 @@
 import React from 'react';
 import {BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Navbar from './Navbar';
-import Classes from '../containers/Classes';
-import ClassEdit  from '../containers/ClassEdit';
-import ClassAdd from '../containers/ClassAdd';
-import Teachers from '../containers/Teachers';
-import Students from '../containers/Students';
-import StudentAdd from '../containers/StudentAdd';
-import StudentEdit from '../containers/StudentEdit';
-import Courses from '../containers/Courses';
-import AddCourse from '../containers/AddCourse';
-import TeacherAdd from '../containers/TeacherAdd';
-import TeacherEdit from '../containers/TeacherEdit';
+import Classes from '../containers/ClassContainers/Classes';
+import ClassEdit  from '../containers/ClassContainers/ClassEdit';
+import ClassAdd from '../containers/ClassContainers/ClassAdd';
+import Teachers from '../containers/TeacherContainers/Teachers';
+import TeacherAdd from '../containers/TeacherContainers/TeacherAdd';
+import TeacherEdit from '../containers/TeacherContainers/TeacherEdit';
+import Students from '../containers/StudentContainers/Students';
+import StudentAdd from '../containers/StudentContainers/StudentAdd';
+import StudentEdit from '../containers/StudentContainers/StudentEdit';
+import Courses from '../containers/CourseContainers/Courses';
+import CourseAdd from '../containers/CourseContainers/CourseAdd';
+import CourseEdit from '../containers/CourseContainers/CourseEdit';
 import '../assets/styles/admin.css';
 
 
@@ -39,7 +40,8 @@ export class Admin extends React.Component {
                             <Route path="/admin/teachers/add" exact component={TeacherAdd} />
                             <Route path="/admin/teachers/edit/:id" exact component={TeacherEdit}/>
                             <Route path="/admin/courses" exact component={Courses} />
-                            <Route path="/admin/courses/add" exact component={AddCourse} />
+                            <Route path="/admin/courses/add" exact component={CourseAdd} />
+                            <Route path="/admin/courses/edit/:id" exact component={CourseEdit}/>
                         </Switch> 
                     </div> 
                 </div>       

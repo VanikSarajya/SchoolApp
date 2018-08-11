@@ -2,7 +2,7 @@ import {loginReducer} from './reducers/loginReducer';
 import {teacherReducer} from './reducers/teacherReducer';
 import {classReducer} from './reducers/classReducer';
 import {studentReducer} from './reducers/studentReducer';
-import {courseReducer} from './reducers/coursereducer';
+import {courseReducer} from './reducers/courseReducer';
 import {createStore ,applyMiddleware, combineReducers} from 'redux';
 import thunk from 'redux-thunk';
 

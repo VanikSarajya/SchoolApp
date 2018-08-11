@@ -1,8 +1,8 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
-import {getTeachers, deleteTeacher} from '../actions/teacherAction';
-import TeacherItem from '../components/TeacherItem';
+import {getTeachers, deleteTeacher} from '../../actions/teacherAction';
+import TeacherItem from '../../components/TeacherComponents/TeacherItem';
 
 export class Teachers extends React.Component {
     componentDidMount(){

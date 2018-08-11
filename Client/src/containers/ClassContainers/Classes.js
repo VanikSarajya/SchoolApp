@@ -1,9 +1,9 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
-import {getClasses, deleteClass} from '../actions/classAction';
-import {getTeachers} from '../actions/teacherAction';
-import ClassItem from '../components/ClassItem';
+import {getClasses, deleteClass} from '../../actions/classAction';
+import {getTeachers} from '../../actions/teacherAction';
+import ClassItem from '../../components/ClassComponents/ClassItem';
 
 export class Classes extends React.Component {
     componentWillMount(){   
