@@ -12,6 +12,38 @@ export function getCourses(){
     }
 }
 
+export function getCourse(id){
+    return async (dispatch) => {
+        const response = await axios.get(process.env.REACT_APP_SERVER_URL + `/admin/courses/${id}`);
+        const {message, currentCourse} = response.data;
+
+        dispatch({
+            type: "GET_COURSE",
+            currentCourse,
+            message
+        })
+    }
+}
+
+export function editCourse(id,name, classId, teacherId, startingDate, endingDate, startingTime, enddingTime){
+    return async (dispatch) => {
+        const response = await axios.put(process.env.REACT_APP_SERVER_URL+ `/admin/courses/edit/${id}`, {name, classId, teacherId, startingDate, endingDate, startingTime, enddingTime});
+        const {message} = response.data;
+
+        dispatch({
+            type: "EDIT_COURSE",
+            message
+        })
+
+        dispatch(getCourses());
+    }
+}
+
+export function clearCurrentCourse(){
+    return {
+        type: "CLEAR_CURRENT_COURSE",
+    }
+}
 
 export function addCourse(name,classId,teacherId,startingDate,endingDate,startingTime,enddingTime){
     return async (dispatch) => {

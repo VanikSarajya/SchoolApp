@@ -24,6 +24,34 @@ exports.get = function (req,res){
     })
 }
 
+exports.getOne = function(req,res){
+    models.courses.findById(req.params.id, {include: [{model: models.classes, required:true}, {model: models.teachers,required:true}]}).then(currentCourse=>{
+        if(currentCourse == null){
+            res.json({
+                message: "There is no Course with this ID"
+            })
+        } else {
+            res.json({
+                currentCourse
+            })
+        }
+    }).catch(err => {
+        throw err;
+    })
+}
+
+exports.edit = function(req,res) {
+    const {name, classId, teacherId, startingDate, endingDate, startingTime, enddingTime} = req.body;
+    models.courses.update({name, classId, teacherId, startingDate, endingDate, startingTime, enddingTime},
+        {where: {id: req.params.id}}).then(
+            res.json({
+                message: "Course successfully updated"
+            })
+        ).catch(err => {
+            throw err
+        })
+}
+
 exports.add = function (req,res) {
     const {name, classId, teacherId, startingDate, endingDate, startingTime, enddingTime} = req.body;
     models.courses.create({name, classId, teacherId, startingDate, endingDate, startingTime, enddingTime}).then(()=>

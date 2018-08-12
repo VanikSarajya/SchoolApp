@@ -14,9 +14,32 @@ export class CourseForm extends React.Component {
             enddingTime: ""
         }
     }
+
+    componentDidMount(){
+        if(this.props.courseId){
+            this.props.getCourse(this.props.courseId)
+        }
+    }
+    componentDidUpdate(){
+        if (this.props.currentCourse) {
+            this.setState({
+                name: this.props.currentCourse.name,
+                classId: this.props.currentCourse.classId,
+                teacherId: this.props.currentCourse.teacherId,
+                startingDate: this.props.currentCourse.startingDate,
+                endingDate: this.props.currentCourse.endingDate,
+                startingTime: this.props.currentCourse.startingTime,
+                enddingTime: this.props.currentCourse.enddingTime
+
+            });
+            this.props.clearCurrentCourse();
+        }
+    }
     handleClick = () => {
         if(this.props.handleAdd){
             this.props.handleAdd(this.state.name,this.state.classId,this.state.teacherId,this.state.startingDate,this.state.endingDate,this.state.startingTime + ":00",this.state.enddingTime+ ":00");
+        } else {
+            this.props.handleEdit(this.props.courseId,this.state.name,this.state.classId,this.state.teacherId,this.state.startingDate,this.state.endingDate,this.state.startingTime + ":00",this.state.enddingTime+ ":00")
         }
     }
     handleChange = (event) => {

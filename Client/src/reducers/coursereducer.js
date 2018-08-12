@@ -1,4 +1,3 @@
-import { stat } from "fs";
 
 const initialState = {
     courses: [],
@@ -18,7 +17,34 @@ export const courseReducer = (state = initialState, action) => {
             }
             return state;
         }
+        case "GET_COURSE":{
+            const {message,currentCourse} = action;
+
+            state = {
+                ...state,
+                message,
+                currentCourse
+            }
+            return state;
+        }
+        case "CLEAR_CURRENT_COURSE":{
+            const currentCourse = null;
+
+            state = {
+                ...state,
+                currentCourse
+            }
+            return state;
+        }
         case "ADD_COURSE":{
+            const {message} = action;
+            state = {
+                ...state,
+                message
+            }
+            return state;
+        }
+        case "EDIT_COURSE": {
             const {message} = action;
             state = {
                 ...state,
