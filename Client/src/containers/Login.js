@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {change, login, isValid} from '../actions/loginaction'
+import {change, login, isValid} from '../actions/loginAction'
 import '../assets/styles/login.css';
 
 export class Login extends React.Component {
