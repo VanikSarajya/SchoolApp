@@ -12,7 +12,7 @@ exports.get = function (req,res){
     }).then(results => {
         if(results == null){
             res.json({
-                message: "There are Courses"
+                message: "There are no Courses"
             });  
         } else {
             res.json({
@@ -22,4 +22,21 @@ exports.get = function (req,res){
     }).catch((err) => {
         throw err;
     })
+}
+
+exports.add = function (req,res) {
+    const {name, classId, teacherId, startingDate, endingDate, startingTime, enddingTime} = req.body;
+    models.courses.create({name, classId, teacherId, startingDate, endingDate, startingTime, enddingTime}).then(()=>
+        res.json({
+            message: "Course successfully added!",
+        })
+    );
+}
+
+exports.delete = function (req,res) {
+    models.courses.destroy({where : {id: req.params.id}}).then(
+        res.json({
+            message: `Course successfully deleted!`
+        })
+    );
 }

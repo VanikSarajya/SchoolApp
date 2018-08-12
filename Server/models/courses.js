@@ -6,8 +6,8 @@ module.exports = (sequelize, DataTypes) => {
     teacherId: DataTypes.INTEGER,
     startingDate: DataTypes.DATEONLY,
     endingDate: DataTypes.DATEONLY,
-    startingTime: DataTypes.DATE,
-    enddingTime: DataTypes.DATE
+    startingTime: DataTypes.TIME,
+    enddingTime: DataTypes.TIME
   }, {timestamps:false});
   courses.associate = function(models) {
     // associations can be defined here

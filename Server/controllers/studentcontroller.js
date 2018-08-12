@@ -40,10 +40,9 @@ exports.getOne = function(req,res){
 
 exports.add = function (req,res) {
     const {firstName, lastName, classId} = req.body;
-    models.students.create({firstName, lastName, classId }).then((newStudent)=>
+    models.students.create({firstName, lastName, classId }).then(()=>
         res.json({
             message: "Student successfully added!",
-            newStudent
         })
     );
 }

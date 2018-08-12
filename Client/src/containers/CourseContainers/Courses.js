@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {getCourses} from '../../actions/courseAction';
+import {getCourses, deleteCourse} from '../../actions/courseAction';
 import CourseItem from '../../components/CourseComponents/CourseItem';
 import {Link} from 'react-router-dom';
 
@@ -12,7 +12,7 @@ export class Courses extends React.Component {
         return (
             <div> 
                 <h1>Courses</h1>
-                <p></p>
+                <p>{this.props.message}</p>
                 <table className="table table-bordered">
                     <thead>
                         <tr>
@@ -26,13 +26,12 @@ export class Courses extends React.Component {
                         </tr>
                     </thead>
                     <tbody>
-                        {this.props.courses.map((course,index)=>{
+                        {this.props.courses.map((course)=>{
                             return (
                                 <CourseItem 
                                     course = {course}
-                                    key ={index}
-                                    classes = {this.props.classes}
-                                    teachers = {this.props.teachers}
+                                    key ={course.id}
+                                    deleteCourse = {this.props.deleteCourse}
                                 />
                             );
                         })}
@@ -48,8 +47,7 @@ export class Courses extends React.Component {
 const mapStateToProps =  (state) => {
     return {
         courses:state.courseReducer.courses,
-        teachers: state.teacherReducer.teachers,
-        classes: state.classReducer.classes
+        message: state.courseReducer.message
     }
 }
 
@@ -57,6 +55,9 @@ const mapDispatchToProps = (dispatch) => {
     return {
         getCourses: () => {
             dispatch(getCourses());
+        },
+        deleteCourse : (id) => {
+            dispatch(deleteCourse(id));
         }
     }
 }

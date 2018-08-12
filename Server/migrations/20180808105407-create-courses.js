@@ -27,10 +27,10 @@ module.exports = {
         type: Sequelize.DATEONLY
       },
       startingTime:{
-        type: Sequelize.DATE
+        type: Sequelize.TIME
       },
       enddingTime: {
-        type: Sequelize.DATE
+        type: Sequelize.TIME
       },
       createdAt: {
         allowNull: false,
