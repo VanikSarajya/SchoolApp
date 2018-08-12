@@ -75,3 +75,7 @@ a:hover, a:active {
     display: flex;
     flex-direction: column;
 }
+
+th {
+    font-size: 14px;
+}

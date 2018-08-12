@@ -2,7 +2,9 @@ const initialState = {
     email: "",
     password: "",
     loggedIn: false,
-    message: ""
+    message: "",
+    firstName: "",
+    lastName: ""
 }
 
 export const loginReducer = (state = initialState, action) => {
@@ -10,20 +12,23 @@ export const loginReducer = (state = initialState, action) => {
         case "CHANGE":
             const target = action.event.target;
             const {name,value} = target;
-            const {email, password} = state;
             state = {
                 ...state,
                 [name]:value
             };
             return state;
-            break;
-        case "LOGIN":
-            const {message} = action;
+        case "LOGIN":{
+            const {message,admin} = action;
+            const {firstName,lastName,email} = admin;
             state={
                 ...state,
-                message
+                message,
+                firstName,
+                lastName,
+                email
             }
             return state;
+        }
         case "AUTHENTICATE":
             const {answer, error} = action;
             state = {

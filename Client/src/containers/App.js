@@ -17,7 +17,12 @@ export class App extends React.Component {
                     <Switch>
                         <Route path="/" exact component={Home}/>
                         <Route path ="/admin" render={() =>(
-                            this.props.loggedIn ? (<Admin/>) : (<Redirect to="/login"/>)
+                            this.props.loggedIn ? 
+                            (<Admin 
+                                firstName = {this.props.firstName}
+                                lastName = {this.props. lastName}
+                                email = {this.props.email}
+                            />) : (<Redirect to="/login"/>)
                         )
 
                         }/>
@@ -32,7 +37,10 @@ export class App extends React.Component {
 }
 const mapStateToProps = (state) => {
     return {
-        loggedIn: state.loginReducer.loggedIn
+        loggedIn: state.loginReducer.loggedIn,
+        email: state.loginReducer.email,
+        firstName: state.loginReducer.firstName,
+        lastName: state.loginReducer.lastName
     }
 }
 const mapDispatchToProps = (dispatch) => {

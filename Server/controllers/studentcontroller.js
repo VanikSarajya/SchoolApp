@@ -1,8 +1,13 @@
-const {students} = require('../models/index');
-const {classes} = require('../models/index');
+const models = require('../models');
+
 
 exports.get = function (req,res){
-    students.findAll().then(results => {
+    models.students.findAll({
+        include: [{
+            model: models.classes,
+            required: true
+        }]
+    }).then(results => {
         if(results == null){
             res.json({
                 message: "There are no students"
@@ -17,18 +22,33 @@ exports.get = function (req,res){
     })
 }
 
+exports.getOne = function(req,res){
+    models.students.findById(req.params.id,{include: [{model:models.classes, required:true}]}).then((student) =>{
+        if(student == null){
+            res.json({
+                message: "There is no student with this ID"
+            })
+        } else {
+            res.json({
+                student
+            })
+        }
+    }).catch((err) => {
+        throw err;
+    })
+}
+
 exports.add = function (req,res) {
     const {firstName, lastName, classId} = req.body;
-    students.create({firstName, lastName, classId }).then((newStudent)=>
+    models.students.create({firstName, lastName, classId }).then(()=>
         res.json({
             message: "Student successfully added!",
-            newStudent
         })
     );
 }
 
 exports.delete = function (req,res) {
-    students.destroy({where : {id: req.body.id}}).then(
+    models.students.destroy({where : {id: req.params.id}}).then(
         res.json({
             message: `Student successfully deleted!`
         })
@@ -36,10 +56,10 @@ exports.delete = function (req,res) {
 }
 
 exports.edit = function (req,res) {
-    const {id, firstName, lastName, classId} = req.body;
-    students.update(
+    const { firstName, lastName, classId} = req.body;
+    models.students.update(
         {firstName, lastName, classId},
-        {where: {id}}
+        {where: {id:req.params.id}}
     ).then(
         res.json({
             message: "Class successfully updated!"

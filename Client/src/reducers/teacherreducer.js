@@ -2,22 +2,12 @@ const teacherInitialState = {
     teachers : [],
     message : "",
     firstName: "",
-    lastName: ""
+    lastName: "",
+    currentTeacher: null
 }
 
 export const teacherReducer = (state = teacherInitialState, action) => {
     switch(action.type){
-        case "CHANGE":{
-            const target = action.event.target;
-            const {name,value} = target;
-
-            state = {
-                ...state,
-                [name]:value
-            }
-            return state;
-            break;
-        }
         case "GET_TEACHERS":{
             const {teachers} = action;
             state = {
@@ -25,50 +15,46 @@ export const teacherReducer = (state = teacherInitialState, action) => {
                 teachers
             }
             return state;
-            break;
         }
-        case "EDIT_TEACHER":{
-            const {message, id, firstName, lastName} = action;
-            const teachers = [...state.teachers];
-            const teacher = teachers.find((teacher) => {
-                return teacher.id === id;
-            })
-            teachers[teachers.indexOf(teacher)].firstName = firstName;
-            teachers[teachers.indexOf(teacher)].lastName = lastName;
+        case "GET_TEACHER":{
+            const {teacher} = action;
             state = {
                 ...state,
-                teachers,
+                currentTeacher: teacher
+            }
+            return state;
+        }
+        case "CLEAR_CURRENT_TEACHER": {
+            const currentTeacher = null;
+            state = {
+                ...state,
+                currentTeacher
+            }
+            return state;
+        }
+        case "EDIT_TEACHER":{
+            const {message} = action;
+            state = {
+                ...state,
                 message
             }
             return state;
-            break;
         }
         case "DELETE_TEACHER":{
-            const deleteMessage = action.message;
-            const teacher = action.teacher;
-
-            const teachers = [...state.teachers];
-            teachers.splice(teachers.indexOf(teacher),1);
-            
+            const deleteMessage = action.message;            
             state ={
                 ...state,
                 message:deleteMessage,
-                teachers
             }
             return state;
-            break;
         }
         case "ADD_TEACHER":{
             const addMessage = action.message;
-            const newTeacher = action.newTeacher;
-            const teachers = [...state.teachers, newTeacher];
             state ={
                 ...state,
                 message: addMessage,
-                teachers
             }
             return state;
-            break;
         }    
         default:
             return state;    

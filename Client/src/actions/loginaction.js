@@ -11,15 +11,16 @@ export function change(event){
 
 export function login(email,password){
     return async (dispatch) => {
-        const response = await axios.post(process.env.REACT_APP_SERVER_URL +"/admin",{email,password});
-        const logged= await response.data.logged;
-        const message = await response.data.message;
-        const token = await response.data.token;
+        const response = await axios.post(process.env.REACT_APP_SERVER_URL +"/admin/login",{email,password});
+        const message = response.data.message;
+        const token = response.data.token;
+        const admin = response.data.admin
 
         localStorage.setItem('jwtToken', token);
         dispatch({
             type: "LOGIN",
-            message
+            message,
+            admin
         })
     }
 }

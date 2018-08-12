@@ -1,7 +1,7 @@
-const {teachers} = require('../models/index');
+const models = require('../models');
 
 exports.get = function (req,res){
-    teachers.findAll().then(results => {
+    models.teachers.findAll().then(results => {
         if(results == null){
             res.json({
                 message: "There are no teachers"
@@ -16,21 +16,37 @@ exports.get = function (req,res){
     })
 }
 
+exports.getOne = function (req,res){
+    models.teachers.findById(req.params.id).then((teacher)=>{
+        if(teacher == null){
+            res.json({
+                message: "There is no teacher with this Id"
+            })  
+        } else {
+            res.json({
+                teacher
+            })
+        }
+    }).catch((err)=> {
+        throw err;
+    })
+}
+
 exports.add = function (req,res) {
     const {firstName,lastName} = req.body;
-    teachers.create({firstName : firstName, lastName: lastName }).then((newTeacher)=>
+    models.teachers.create({firstName, lastName }).then(()=>
         res.json({
             message: "Teacher successfully added!",
-            newTeacher
         })
     );
 }
 
 exports.edit = function (req,res) {
-    const {id, firstName, lastName} = req.body;
-    teachers.update(
-        {firstName: firstName, lastName:lastName},
-        {where: {id:id}}
+    const { firstName, lastName} = req.body;
+    const {id} = req.params;
+    models.teachers.update(
+        {firstName, lastName},
+        {where: {id}}
     ).then(
         res.json({
             message: "Teacher successfully updated!"
@@ -39,7 +55,7 @@ exports.edit = function (req,res) {
 }
 
 exports.delete = function (req,res) {
-    teachers.destroy({where : {id: req.body.id}}).then(
+    models.teachers.destroy({where : {id: req.params.id}}).then(
         res.json({
             message: `Teacher successfully deleted!`
         })
