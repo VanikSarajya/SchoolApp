@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import StudentForm from '../../components/StudentComponents/StudentForm';
-import { addStudent } from '../../actions/studentActions';
+import { addStudent } from '../../actions/studentAction';
 
 export class StudentAdd  extends React.Component {
     render(){

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import image from '../assets/pictures/logo.png';
-import {logout} from '../actions/loginaction';
+import {logout} from '../actions/loginAction';
 
 export class Navbar extends React.Component {
     render() {

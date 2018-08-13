@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 
-import {getStudents, deleteStudent} from '../../actions/studentActions';
+import {getStudents, deleteStudent} from '../../actions/studentAction';
 import StudentItem from '../../components/StudentComponents/StudentItem';
 
 export class Students extends React.Component {

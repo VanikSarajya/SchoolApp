@@ -5,7 +5,7 @@ import Login from './Login';
 import Error from '../components/Error';
 import Home from '../components/Home';
 import Admin from '../components/Admin';
-import { authenticate } from '../actions/loginaction';
+import { authenticate } from '../actions/loginAction';
 export class App extends React.Component {
     componentWillMount() {
         this.props.authenticate(localStorage.getItem('jwtToken'));
