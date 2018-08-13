@@ -1,13 +1,5 @@
 import axios from "axios";
-import isEmail from 'validator/lib/isEmail';
 require('dotenv').config();
-
-export function change(event){
-    return {
-        type: "CHANGE",
-        event
-    }
-}
 
 export function login(email,password){
     return async (dispatch) => {
@@ -39,8 +31,4 @@ export function authenticate(token){
 
 export function logout(){
     localStorage.removeItem('jwtToken');
-}
-
-export function isValid(email, password) {
-    return (isEmail(email) && password.length>=6);
 }

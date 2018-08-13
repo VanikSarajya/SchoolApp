@@ -6,7 +6,7 @@ export class ClassForm extends React.Component {
         super();
         this.state = {
             name: "",
-            teacherId: ""
+            teacherId: "",
         }
     }
 
