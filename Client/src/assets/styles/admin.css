@@ -79,3 +79,21 @@ a:hover, a:active {
 th {
     font-size: 14px;
 }
+
+.admin-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    border-radius: 10px;
+    font-weight: bold;
+    color: black;
+    justify-content: center;
+    width: 200px;
+    margin-left: 20px;
+}
+
+.email {
+    font-size: 10px;
+}

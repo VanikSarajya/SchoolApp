@@ -14,13 +14,11 @@ export function login(email,password){
         const response = await axios.post(process.env.REACT_APP_SERVER_URL +"/admin/login",{email,password});
         const message = response.data.message;
         const token = response.data.token;
-        const admin = response.data.admin
 
         localStorage.setItem('jwtToken', token);
         dispatch({
             type: "LOGIN",
-            message,
-            admin
+            message
         })
     }
 }
@@ -28,11 +26,12 @@ export function login(email,password){
 export function authenticate(token){
     return async (dispatch) => {
         const response = await axios.post(process.env.REACT_APP_SERVER_URL+"/admin/auth",{token});
-        const {answer,error} = await response.data;
+        const {answer,error, admin} = response.data;
 
         dispatch({
             type: "AUTHENTICATE",
             answer,
+            admin,
             error
         })
     }

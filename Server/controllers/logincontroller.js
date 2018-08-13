@@ -5,7 +5,7 @@ require('dotenv').config();
 
 exports.login = function (req,res) {
     const {email,password} = req.body;
-    models.admins.findOne({where : {email: email}})
+    models.admins.findOne({where : {email}})
     .then((results) => {
         if (results == null){
             res.json({
@@ -17,8 +17,7 @@ exports.login = function (req,res) {
                     id: results.id
                 }, process.env.JWT_SECRET , {expiresIn : 3 * 60 * 60});
                 res.json({
-                    token,
-                    admin: results
+                    token
                 });
             }
         }
@@ -34,7 +33,12 @@ exports.authenticate = function (req,res) {
             if (err){
                 res.json({error: "Failed to authenticate"});
             } else {
-                res.json({answer: true})
+                models.admins.findOne({where: {id: decoded.id}}).then(result => {
+                    res.json({
+                        answer: true,
+                        admin: result
+                    })
+                })
             }
         });
     } else{

@@ -18,25 +18,26 @@ export const loginReducer = (state = initialState, action) => {
             };
             return state;
         case "LOGIN":{
-            const {message,admin} = action;
-            const {firstName,lastName,email} = admin;
+            const {message} = action;
             state={
                 ...state,
                 message,
-                firstName,
-                lastName,
-                email
             }
             return state;
         }
-        case "AUTHENTICATE":
-            const {answer, error} = action;
+        case "AUTHENTICATE":{
+            const {answer, error, admin} = action;
+            const {firstName,lastName,email} = admin;
             state = {
                 ...state,
                 loggedIn:answer,
+                message: error,
+                firstName,
+                lastName,
+                email
             } 
             return state;   
-            break;
+        }
         default: 
             return state;    
     }

@@ -7,8 +7,10 @@ import Home from '../components/Home';
 import Admin from '../components/Admin';
 import { authenticate } from '../actions/loginAction';
 export class App extends React.Component {
-    componentWillMount() {
-        this.props.authenticate(localStorage.getItem('jwtToken'));
+    componentDidMount() {
+        if(localStorage.getItem('jwtToken')){
+            this.props.authenticate(localStorage.getItem('jwtToken'));
+        }
     }
     render(){
         return (
