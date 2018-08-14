@@ -1,5 +1,8 @@
+
 import axios from "axios";
+import { push } from "../../node_modules/react-router-redux";
 require('dotenv').config();
+
 
 export function login(email,password){
     return async (dispatch) => {
@@ -12,23 +15,41 @@ export function login(email,password){
             type: "LOGIN",
             message
         })
+        dispatch(authenticate(token));
     }
 }
 
 export function authenticate(token){
     return async (dispatch) => {
         const response = await axios.post(process.env.REACT_APP_SERVER_URL+"/admin/auth",{token});
-        const {answer,error, admin} = response.data;
+        const {error, admin} = response.data;
+        if(admin){
+            dispatch({
+                type: "AUTHENTICATE",
+                admin,
+                error
+            })
+            localStorage.setItem('user', admin.email);
+            dispatch(push('/admin/classes'))
+        }
+    }
+}
 
-        dispatch({
-            type: "AUTHENTICATE",
-            answer,
-            admin,
-            error
-        })
+export function getUserData(token){
+    return async (dispatch) => {
+        const response = await axios.post(process.env.REACT_APP_SERVER_URL+"/admin/auth",{token});
+        const {error, admin} = response.data;
+        if(admin){
+            dispatch({
+                type: "GET_USER_DATA",
+                admin,
+                error
+            })
+        }
     }
 }
 
 export function logout(){
     localStorage.removeItem('jwtToken');
+    localStorage.removeItem('user');
 }

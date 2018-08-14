@@ -9,7 +9,7 @@ exports.login = function (req,res) {
     .then((results) => {
         if (results == null){
             res.json({
-                message: "Wrong email or password"
+                message: "Wrong Email"
             });
         } else if (Object.keys(results).length>0){
             if(bcrypt.compareSync(password, results.password)){
@@ -19,6 +19,10 @@ exports.login = function (req,res) {
                 res.json({
                     token
                 });
+            } else {
+                res.json({
+                    message: "Wrong Password"
+                })
             }
         }
     }).catch((error) => {
@@ -31,12 +35,13 @@ exports.authenticate = function (req,res) {
     if (token) {
         jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
             if (err){
-                res.json({error: "Failed to authenticate"});
+                res.json({
+                error: "Failed to authenticate",
+            });
             } else {
                 models.admins.findOne({where: {id: decoded.id}}).then(result => {
                     res.json({
-                        answer: true,
-                        admin: result
+                        admin: result,
                     })
                 })
             }

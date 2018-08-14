@@ -1,5 +1,5 @@
 import React from 'react';
-import {BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import {Router, Route, Switch } from 'react-router';
 import Navbar from './Navbar';
 import Classes from '../containers/ClassContainers/Classes';
 import ClassEdit  from '../containers/ClassContainers/ClassEdit';
@@ -13,13 +13,14 @@ import StudentEdit from '../containers/StudentContainers/StudentEdit';
 import Courses from '../containers/CourseContainers/Courses';
 import CourseAdd from '../containers/CourseContainers/CourseAdd';
 import CourseEdit from '../containers/CourseContainers/CourseEdit';
+import history from '../history';
 import '../assets/styles/admin.css';
 
 
 export class Admin extends React.Component {
     render(){
         return (
-            <Router>
+            <Router history={history}>
                 <div className="admin">
                     <div className="sidebar">
                         <Navbar 

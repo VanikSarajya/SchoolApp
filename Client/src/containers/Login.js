@@ -26,7 +26,7 @@ export class Login extends React.Component {
         return(
             <div className="main">
                 <div className="form">  
-                    <form onSubmit={()=>{ this.props.login(this.state.email,this.state.password);}}>
+                    <form onSubmit={(e)=>{ e.preventDefault(); this.props.login(this.state.email,this.state.password);}}>
                         <div className="form-group">
                             <label>
                                 Email adress
