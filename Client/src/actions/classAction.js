@@ -67,5 +67,3 @@ export function editClass(id, name, teacherId){
         dispatch(getClasses());
     }
 }
-
-hh
