@@ -4,7 +4,7 @@ require('dotenv').config();
 export function getClasses(){
     return async (dispatch) => {
         const response = await axios.get(process.env.REACT_APP_SERVER_URL + '/admin/classes');
-        const {classes,message} = await response.data;
+        const {classes} = await response.data;
         dispatch({
             type: "GET_CLASSES",
             classes

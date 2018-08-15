@@ -1,43 +1,19 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {Link} from 'react-router-dom';
 import {getClasses, deleteClass} from '../../actions/classAction';
-import { getFreeTeachers} from '../../actions/teacherAction';
-import ClassItem from '../../components/ClassComponents/ClassItem';
+import ClassList from '../../components/ClassComponents/ClassList';
 
 export class Classes extends React.Component {
-    componentWillMount(){   
+    componentDidMount(){   
         this.props.getClasses();
-        this.props.getFreeTeachers();
     }
     render () {
         return (
-            <div className="classes">
-                <h1>Classes</h1>
-                <p>{this.props.message}</p>
-                <table className="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Name</th>
-                            <th>Teacher</th>
-                            <th> Actions </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {this.props.classes.map((clas) => {
-                            return (
-                                <ClassItem 
-                                    key = {clas.id}
-                                    class = {clas}
-                                    handleDelete = {this.props.handleDelete}
-                                />
-                            );    
-                        })}
-                    </tbody>
-                </table>
-                <Link to="/admin/classes/add"><button type="button" className="btn btn-success">Add Class</button></Link>
-            </div>
+            <ClassList
+                classes = {this.props.classes}
+                message = {this.props.message}
+                handleDelete = {this.props.handleDelete} 
+            />
         );
     }
 }
@@ -56,9 +32,6 @@ const mapDispatchToProps = (dispatch) => {
         },
         handleDelete: (clas) => {
             dispatch(deleteClass(clas));
-        },
-        getFreeTeachers: () => {
-            dispatch(getFreeTeachers());
         }
     }
 }

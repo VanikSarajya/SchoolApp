@@ -2,8 +2,12 @@ import React from 'react';
 import {connect} from 'react-redux';
 import ClassForm from '../../components/ClassComponents/ClassForm';
 import { addClass } from '../../actions/classAction';
+import {getFreeTeachers} from '../../actions/teacherAction';
 
 export class ClassAdd extends React.Component {
+    componentDidMount(){
+        this.props.getFreeTeachers()
+    }
     render(){
         return (
             <div>
@@ -29,6 +33,9 @@ const mapDispatchToProps = (dispatch) => {
     return {
         handleAdd: (name, teacherId) => {
             dispatch(addClass(name,teacherId));
+        },
+        getFreeTeachers: () =>{
+            dispatch(getFreeTeachers());
         }
     }
 }

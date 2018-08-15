@@ -7,6 +7,7 @@ export class ClassForm extends React.Component {
         this.state = {
             name: "",
             teacherId: "",
+            currentClass: null
         }
     }
 
@@ -18,12 +19,13 @@ export class ClassForm extends React.Component {
 
     componentDidUpdate(){
         if (this.props.currentClass) {
+            this.props.freeTeachers.push(this.props.currentClass.teacher);
             this.setState({
                 name: this.props.currentClass.name,
-                teacherId: this.props.currentClass.teacherId
+                teacherId: this.props.currentClass.teacherId,
+                currentClass: this.props.currentClass
             });
             this.props.clearCurrentClass()
-            this.props.freeTeachers.push(this.props.currentClass.teacher);
         }
     }
     handleChange = (event) => {
@@ -52,6 +54,8 @@ export class ClassForm extends React.Component {
                     Teacher
                     <select name="teacherId" value={this.state.teacherId} onChange={this.handleChange} className="form-control">
                         <option>Select Teacher</option>
+                        {this.state.currentClass ? 
+                        <option value={this.state.currentClass.teacherId}> { this.state.currentClass.teacher.firstName } {this.state.currentClass.teacher.lastName} </option>: ""}
                         {this.props.freeTeachers.map((teacher) => {
                             return (
                                 <option value={teacher.id}> {teacher.firstName} {teacher.lastName} </option>

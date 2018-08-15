@@ -25,7 +25,7 @@ export class Admin extends React.Component {
                     <div className="sidebar">
                         <Navbar 
                             firstName = {this.props.firstName}
-                            lastName = {this.props. lastName}
+                            lastName = {this.props.lastName}
                             email = {this.props.email}
                         />
                     </div>

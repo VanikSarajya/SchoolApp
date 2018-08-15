@@ -2,8 +2,13 @@ import React from 'react';
 import {connect} from 'react-redux';
 import ClassForm from '../../components/ClassComponents/ClassForm';
 import {editClass, getClass, clearCurrentClass} from '../../actions/classAction';
+import {getFreeTeachers} from '../../actions/teacherAction';
+
 
 export class ClassEdit extends React.Component {
+    componentDidMount(){
+        this.props.getFreeTeachers()
+    }
     render(){
         return (
             <div>
@@ -40,6 +45,9 @@ const mapDispatchToProps = (dispatch) => {
         },
         clearCurrentClass: ()=> {
             dispatch(clearCurrentClass());
+        },
+        getFreeTeachers: () =>{
+            dispatch(getFreeTeachers());
         }
     }
 }

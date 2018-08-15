@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {Router, Route , Switch} from 'react-router';
-import {ConnectedRouter, push} from 'react-router-redux';
+import { Route , Switch} from 'react-router';
+import {ConnectedRouter} from 'react-router-redux';
 import Login from './Login';
 import Error from '../components/Error';
 import Home from '../components/Home';

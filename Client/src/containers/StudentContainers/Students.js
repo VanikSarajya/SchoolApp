@@ -1,9 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {Link} from 'react-router-dom';
-
 import {getStudents, deleteStudent} from '../../actions/studentAction';
-import StudentItem from '../../components/StudentComponents/StudentItem';
+import { StudentList } from '../../components/StudentComponents/StudentList';
 
 export class Students extends React.Component {
     componentDidMount(){
@@ -11,33 +9,12 @@ export class Students extends React.Component {
     }
     render () {
         return (
-            <div>
-                <h1>Students</h1>
-                <p>{this.props.message} </p>
-                <table className="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>First Name</th>
-                            <th>Last Name</th>
-                            <th>Class</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {this.props.students.map((student) => {
-                            return (
-                                <StudentItem 
-                                    key = {student.id}
-                                    student = {student}
-                                    handleDelete = {this.props.handleDelete}
-                                />
-                            );    
-                        })}
-                    </tbody>
-                </table>
-                <Link to='/admin/students/add'><button type="button" className="btn btn-success">Add Student</button></Link>
-            </div>
+            <StudentList 
+                students = {this.props.students}
+                classes = {this.props.classes}
+                message = {this.props.message}
+                handleDelete = {this.props.handleDelete}
+            />
         );
     }
 }
