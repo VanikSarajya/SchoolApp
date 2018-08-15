@@ -13,7 +13,7 @@ export class ClassEdit extends React.Component {
                     handleEdit = {this.props.handleEdit}
                     getClass = {this.props.getClass}
                     classId = {this.props.match.params.id}
-                    teachers = {this.props.teachers}
+                    freeTeachers = {this.props.freeTeachers}
                     classes = {this.props.classes}
                     clearCurrentClass = {this.props.clearCurrentClass}
                 />
@@ -24,7 +24,7 @@ export class ClassEdit extends React.Component {
 const mapStateToProps = (state) => {
     return{
         currentClass: state.classReducer.currentClass,
-        teachers: state.teacherReducer.teachers,
+        freeTeachers: state.teacherReducer.freeTeachers,
         classes: state.classReducer.classes
 
     }

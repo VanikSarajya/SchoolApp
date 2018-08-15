@@ -10,7 +10,7 @@ export class ClassAdd extends React.Component {
                 <h1> Adding Class </h1>
                 <ClassForm 
                     handleAdd = {this.props.handleAdd}
-                    teachers = {this.props.teachers}
+                    freeTeachers = {this.props.freeTeachers}
                     classes = {this.props.classes}
                 />
             </div>
@@ -20,7 +20,7 @@ export class ClassAdd extends React.Component {
 
 const mapStateToProps = (state) => {
     return{
-        teachers: state.teacherReducer.teachers,
+        freeTeachers: state.teacherReducer.freeTeachers,
         classes: state.classReducer.classes
     }
 }

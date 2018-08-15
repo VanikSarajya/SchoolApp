@@ -23,24 +23,8 @@ export class ClassForm extends React.Component {
                 teacherId: this.props.currentClass.teacherId
             });
             this.props.clearCurrentClass()
+            this.props.freeTeachers.push(this.props.currentClass.teacher);
         }
-    }
-    getOnlyFreeTeachers(teachers,classes){
-        const freeTeachers = [];
-        if(teachers && classes){
-            for (let i=0; i < teachers.length; ++i){
-                var matched = false;
-                for(let j=0; j < classes.length; ++j){
-                    if(teachers[i].id == classes[j].teacherId){
-                        matched = true;
-                    }
-                }
-                if(!matched){
-                    freeTeachers.push(teachers[i]);
-                }
-            }
-        }
-        return freeTeachers;
     }
     handleChange = (event) => {
         const target = event.target;
@@ -68,7 +52,7 @@ export class ClassForm extends React.Component {
                     Teacher
                     <select name="teacherId" value={this.state.teacherId} onChange={this.handleChange} className="form-control">
                         <option>Select Teacher</option>
-                        {this.props.teachers.map((teacher) => {
+                        {this.props.freeTeachers.map((teacher) => {
                             return (
                                 <option value={teacher.id}> {teacher.firstName} {teacher.lastName} </option>
                             );

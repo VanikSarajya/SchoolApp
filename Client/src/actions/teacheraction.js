@@ -5,7 +5,7 @@ export function deleteTeacher(teacher) {
     return async dispatch => {
         const id = teacher.id;
         const response = await axios.delete(process.env.REACT_APP_SERVER_URL + `/admin/teachers/${id}`);
-        const {message} = await response.data;
+        const {message} = response.data;
         dispatch({
             type: "DELETE_TEACHER",
             message
@@ -17,7 +17,7 @@ export function deleteTeacher(teacher) {
 export function getTeachers(){
     return async (dispatch) => {
         const response = await axios.get(process.env.REACT_APP_SERVER_URL + '/admin/teachers');
-        const {teachers,message} = await response.data;
+        const {teachers,message} = response.data;
         dispatch({
             type: "GET_TEACHERS",
             teachers,
@@ -29,7 +29,7 @@ export function getTeachers(){
 export function getTeacher(id){
     return async (dispatch) => {
         const response = await axios.get(process.env.REACT_APP_SERVER_URL+ `/admin/teachers/${id}`);
-        const {teacher} = await response.data;
+        const {teacher} = response.data;
 
         dispatch({
             type: 'GET_TEACHER',
@@ -37,6 +37,19 @@ export function getTeacher(id){
         })
     }
 }
+
+export function getFreeTeachers(){
+    return async (dispatch) => {
+        const response = await axios.get(process.env.REACT_APP_SERVER_URL+ `/admin/teachers/free/only`);
+        const {freeTeachers} = response.data;
+
+        dispatch({
+            type: "GET_FREE_TEACHERS",
+            freeTeachers
+        })
+    }
+}
+
 
 export function clearCurrentTeacher(){
     return {
@@ -47,7 +60,7 @@ export function clearCurrentTeacher(){
 export function addTeacher(firstName, lastName){
     return async (dispatch) => {
         const response = await axios.post(process.env.REACT_APP_SERVER_URL + '/admin/teachers/add', {firstName,lastName});
-        const {message} = await response.data;
+        const {message} = response.data;
         dispatch({
             type: "ADD_TEACHER",
             message,
@@ -59,7 +72,7 @@ export function addTeacher(firstName, lastName){
 export function editTeacher(firstName, lastName, id){
     return async (dispatch) => {
         const response = await axios.put(process.env.REACT_APP_SERVER_URL + `/admin/teachers/edit/${id}`, {firstName,lastName});
-        const {message} = await response.data;
+        const {message} = response.data;
         dispatch ({
             type: "EDIT_TEACHER",
             message

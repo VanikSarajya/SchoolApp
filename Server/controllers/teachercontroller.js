@@ -32,6 +32,37 @@ exports.getOne = function (req,res){
     })
 }
 
+exports.getFree = function (req,res){
+    let teachers = [];
+    let classes = [];
+    let freeTeachers = [];
+    const a = models.classes.findAll().then(results => {
+        classes = results;
+        return Promise.resolve();
+    })
+    const b = models.teachers.findAll().then(results => {
+        teachers = results;
+        return Promise.resolve();
+    })
+
+    Promise.all([a,b]).then(()=>{
+        for(let i=0; i < teachers.length; ++i){
+            let matched = false;
+            for(let j=0; j < classes.length; ++j){
+                if(teachers[i].dataValues.id == classes[j].dataValues.teacherId){
+                    matched = true;
+                }
+            }
+            if(!matched){
+                freeTeachers.push(teachers[i]);
+            }
+        }
+        res.json({
+            freeTeachers
+        })
+    })
+}
+
 exports.add = function (req,res) {
     const {firstName,lastName} = req.body;
     models.teachers.create({firstName, lastName }).then(()=>

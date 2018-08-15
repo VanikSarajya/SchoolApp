@@ -2,13 +2,13 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 import {getClasses, deleteClass} from '../../actions/classAction';
-import {getTeachers} from '../../actions/teacherAction';
+import { getFreeTeachers} from '../../actions/teacherAction';
 import ClassItem from '../../components/ClassComponents/ClassItem';
 
 export class Classes extends React.Component {
     componentWillMount(){   
         this.props.getClasses();
-        this.props.getTeachers();
+        this.props.getFreeTeachers();
     }
     render () {
         return (
@@ -57,8 +57,8 @@ const mapDispatchToProps = (dispatch) => {
         handleDelete: (clas) => {
             dispatch(deleteClass(clas));
         },
-        getTeachers: () => {
-            dispatch(getTeachers());
+        getFreeTeachers: () => {
+            dispatch(getFreeTeachers());
         }
     }
 }
