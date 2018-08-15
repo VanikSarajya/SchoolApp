@@ -2,8 +2,14 @@ import React from 'react';
 import {connect} from 'react-redux';
 import CourseForm from '../../components/CourseComponents/CourseForm';
 import {getCourse ,clearCurrentCourse, editCourse} from '../../actions/courseAction';
+import {getClasses} from '../../actions/classAction';
+import {getTeachers} from '../../actions/teacherAction';
 
 export class CourseEdit extends React.Component {
+    componentDidMount(){
+        this.props.getClasses();
+        this.props.getTeachers();
+    }
     render() {
         return (
             <div> 
@@ -39,6 +45,12 @@ const mapStateToProps = (state) => {
         },
         handleEdit: (id,name, classId, teacherId, startingDate, endingDate, startingTime, enddingTime) => {
             dispatch(editCourse(id,name, classId, teacherId, startingDate, endingDate, startingTime, enddingTime));
+        },
+        getClasses: () => {
+            dispatch(getClasses());
+        },
+        getTeachers: () => {
+            dispatch(getTeachers());
         }
      }
  }

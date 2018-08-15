@@ -1,8 +1,7 @@
 const teacherInitialState = {
     teachers : [],
+    freeTeachers:[],
     message : "",
-    firstName: "",
-    lastName: "",
     currentTeacher: null
 }
 
@@ -21,6 +20,14 @@ export const teacherReducer = (state = teacherInitialState, action) => {
             state = {
                 ...state,
                 currentTeacher: teacher
+            }
+            return state;
+        }
+        case "GET_FREE_TEACHERS":{
+            const {freeTeachers} = action;
+            state = {
+                ...state,
+                freeTeachers
             }
             return state;
         }

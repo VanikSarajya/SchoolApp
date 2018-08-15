@@ -2,8 +2,12 @@ import React from 'react';
 import {connect} from 'react-redux'
 import StudentForm from '../../components/StudentComponents/StudentForm';
 import { editStudent, getStudent, clearCurrentStudent } from '../../actions/studentAction';
+import {getClasses} from '../../actions/classAction';
 
 export class StudentEdit extends React.Component {
+    componentDidMount(){
+        this.props.getClasses()
+    }
     render(){
         return(
             <div> 
@@ -38,7 +42,10 @@ const mapDispatchToProps = (dispatch) => {
         },
         clearCurrentStudent: ()=>{
             dispatch(clearCurrentStudent());
-        }
+        },
+        getClasses: ()=> {
+            dispatch(getClasses());
+        } 
     }
 }
 

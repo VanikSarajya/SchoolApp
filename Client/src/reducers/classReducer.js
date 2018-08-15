@@ -59,4 +59,4 @@ export const classReducer  = (state = initialState, action) => {
         default:
             return state;
     }
-} 
+}

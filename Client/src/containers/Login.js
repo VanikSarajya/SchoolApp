@@ -1,27 +1,45 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {change, login, isValid} from '../actions/loginAction'
+import {login} from '../actions/loginAction'
+import isEmail from 'validator/lib/isEmail';
 import '../assets/styles/login.css';
 
 export class Login extends React.Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            email: "",
+            password: ""
+        }
+    }
+    isValid = (email, password) => {
+        return (isEmail(email) && password.length>=6);
+    }
+    handleChange = (event) => {
+        const target = event.target;
+        const {name,value} = target;
+        this.setState({
+            [name]: value
+        })
+    }
     render() {
         return(
             <div className="main">
                 <div className="form">  
-                    <form onSubmit={()=>{ this.props.login(this.props.email,this.props.password);}}>
+                    <form onSubmit={(e)=>{ e.preventDefault(); this.props.login(this.state.email,this.state.password);}}>
                         <div className="form-group">
                             <label>
                                 Email adress
                             </label>    
-                            <input className="form-control" type="text" name="email" onChange={this.props.handleChange} value={this.props.email} placeholder="Email"/>
+                            <input className="form-control" type="text" name="email" onChange={this.handleChange} value={this.state.email} placeholder="Email"/>
                         </div> 
                         <div className="form-group">
                             <label>
                                 Password
                             </label>    
-                            <input className="form-control" type="password" name="password" onChange={this.props.handleChange}  value={this.props.password} placeholder="Password"/>
+                            <input className="form-control" type="password" name="password" onChange={this.handleChange}  value={this.state.password} placeholder="Password"/>
                         </div>
-                        <input className="btn btn-primary" disabled={!isValid(this.props.email,this.props.password)} type="submit" value="Log-In" />
+                        <input className="btn btn-primary" disabled={!this.isValid(this.state.email,this.state.password)} type="submit" value="Log-In" />
                         <p className="message">{this.props.message}</p>
                     </form> 
                 </div>
@@ -32,8 +50,6 @@ export class Login extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        email:state.loginReducer.email,
-        password:state.loginReducer.password,
         loggedIn:state.loginReducer.loggedIn,
         message: state.loginReducer.message
     };
@@ -41,12 +57,9 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        handleChange: (event) => {
-            dispatch(change(event));
-        },
         login: (email,password) => {
             dispatch(login(email,password));
-        },
+        }
     }
 
 }

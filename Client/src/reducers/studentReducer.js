@@ -1,42 +1,56 @@
-
 const initialState = {
-    courses: [],
+    students: [],
     message: "",
-    currentCourse: null
+    currentStudent: null
 }
 
-
-export const courseReducer = (state = initialState, action) => {
+export const studentReducer = (state=initialState, action) => {
     switch(action.type){
-        case "GET_COURSES":{
-            const {courses} = action;
+        case "GET_STUDENTS": {
+            const {students} = action;
 
             state = {
                 ...state,
-                courses
+                students
             }
             return state;
         }
-        case "GET_COURSE":{
-            const {message,currentCourse} = action;
+        case "GET_STUDENT":{
+            const {student} = action;
 
             state = {
+                ...state,
+                currentStudent: student
+            }
+            return state;
+        }
+        case "CLEAR_CURRENT_STUDENT":{
+            const currentStudent = null;
+
+            state = {
+                ...state,
+                currentStudent
+            }
+            return state;
+        }
+        case "ADD_STUDENT": {
+            const {message} = action;
+            state = {
+                ...state,
+                message
+            }
+            return state;
+        }
+        case "DELETE_STUDENT":{
+            const {message} = action;
+
+            state ={
                 ...state,
                 message,
-                currentCourse
             }
             return state;
         }
-        case "CLEAR_CURRENT_COURSE":{
-            const currentCourse = null;
-
-            state = {
-                ...state,
-                currentCourse
-            }
-            return state;
-        }
-        case "ADD_COURSE":{
+        case "EDIT_STUDENT":{
             const {message} = action;
             state = {
                 ...state,
@@ -44,23 +58,7 @@ export const courseReducer = (state = initialState, action) => {
             }
             return state;
         }
-        case "EDIT_COURSE": {
-            const {message} = action;
-            state = {
-                ...state,
-                message
-            }
-            return state;
-        }
-        case "DELETE_COURSE":{
-            const {message} = action;
-            state = {
-                ...state,
-                message
-            }
-            return state;
-        }
-        default: 
+        default:
             return state;
     }
 }

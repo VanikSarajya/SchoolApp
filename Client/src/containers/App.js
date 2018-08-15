@@ -1,39 +1,43 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import { Redirect,BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { Route , Switch} from 'react-router';
+import {ConnectedRouter} from 'react-router-redux';
 import Login from './Login';
 import Error from '../components/Error';
 import Home from '../components/Home';
 import Admin from '../components/Admin';
-import { authenticate } from '../actions/loginAction';
+import PrivateRoute from '../components/PrivateRoute';
+import { authenticate, getUserData } from '../actions/loginAction';
+import history from '../history';
+
+
 export class App extends React.Component {
-    componentDidMount() {
-        if(localStorage.getItem('jwtToken')){
-            this.props.authenticate(localStorage.getItem('jwtToken'));
-        }
+    componentDidMount(){
+        this.props.getUserData(localStorage.getItem('jwtToken'));
     }
     render(){
         return (
-            <Router>
-                <div>
-                    <Switch>
-                        <Route path="/" exact component={Home}/>
-                        <Route path ="/admin" render={() =>(
-                            this.props.loggedIn ? 
-                            (<Admin 
-                                firstName = {this.props.firstName}
-                                lastName = {this.props. lastName}
-                                email = {this.props.email}
-                            />) : (<Redirect to="/login"/>)
-                        )
+            <ConnectedRouter history={history}>
+                <Switch>
+                    <Route path="/" exact component={Home}/>
+                    <PrivateRoute  
+                        path="/admin"
+                        component={()=>{
+                            return (
+                                <Admin
+                                    firstName = {this.props.firstName}
+                                    lastName = {this.props.lastName}
+                                    email = {this.props.email}
+                                />
+                            )}} 
+                        extraProps = {{
 
-                        }/>
-                        <Route  path="/login" render={() => (
-                        this.props.loggedIn ? (<Redirect to="/admin/classes"/>) : (<Login/>))}/>
-                        <Route component={Error}/>
-                    </Switch>
-                </div>
-            </Router> 
+                        }}
+                    />
+                    <Route  path="/login" exact component={Login}/>
+                    <Route component={Error}/>
+                </Switch>
+            </ConnectedRouter> 
         );    
     }
 }
@@ -42,13 +46,17 @@ const mapStateToProps = (state) => {
         loggedIn: state.loginReducer.loggedIn,
         email: state.loginReducer.email,
         firstName: state.loginReducer.firstName,
-        lastName: state.loginReducer.lastName
+        lastName: state.loginReducer.lastName,
+        authChecked: state.loginReducer.authChecked
     }
 }
 const mapDispatchToProps = (dispatch) => {
     return {
         authenticate: (token) => {
             dispatch(authenticate(token));
+        },
+        getUserData: (token) => {
+            dispatch(getUserData(token));
         }
     }
 }

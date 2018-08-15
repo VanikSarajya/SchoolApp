@@ -2,8 +2,14 @@ import React from 'react';
 import {connect} from 'react-redux';
 import CourseForm from '../../components/CourseComponents/CourseForm';
 import {addCourse} from '../../actions/courseAction';
+import {getClasses} from '../../actions/classAction';
+import {getTeachers} from '../../actions/teacherAction';
 
 export class CourseAdd extends React.Component {
+    componentDidMount(){
+        this.props.getClasses();
+        this.props.getTeachers();
+    }
     render() {
         return (
             <div> 
@@ -31,6 +37,12 @@ const mapDispatchToProps = (dispatch) => {
     return {
         handleAdd: (name,classId,teacherId,startingDate,endingDate,startingTime,enddingTime) => {
             dispatch(addCourse(name,classId,teacherId,startingDate,endingDate,startingTime,enddingTime));
+        },
+        getClasses: () => {
+            dispatch(getClasses());
+        },
+        getTeachers: () => {
+            dispatch(getTeachers());
         }
     }
 }

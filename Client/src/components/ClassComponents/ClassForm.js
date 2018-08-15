@@ -6,7 +6,8 @@ export class ClassForm extends React.Component {
         super();
         this.state = {
             name: "",
-            teacherId: ""
+            teacherId: "",
+            currentClass: null
         }
     }
 
@@ -18,29 +19,14 @@ export class ClassForm extends React.Component {
 
     componentDidUpdate(){
         if (this.props.currentClass) {
+            this.props.freeTeachers.push(this.props.currentClass.teacher);
             this.setState({
                 name: this.props.currentClass.name,
-                teacherId: this.props.currentClass.teacherId
+                teacherId: this.props.currentClass.teacherId,
+                currentClass: this.props.currentClass
             });
             this.props.clearCurrentClass()
         }
-    }
-    getOnlyFreeTeachers(teachers,classes){
-        const freeTeachers = [];
-        if(teachers && classes){
-            for (let i=0; i < teachers.length; ++i){
-                var matched = false;
-                for(let j=0; j < classes.length; ++j){
-                    if(teachers[i].id == classes[j].teacherId){
-                        matched = true;
-                    }
-                }
-                if(!matched){
-                    freeTeachers.push(teachers[i]);
-                }
-            }
-        }
-        return freeTeachers;
     }
     handleChange = (event) => {
         const target = event.target;
@@ -68,7 +54,9 @@ export class ClassForm extends React.Component {
                     Teacher
                     <select name="teacherId" value={this.state.teacherId} onChange={this.handleChange} className="form-control">
                         <option>Select Teacher</option>
-                        {this.props.teachers.map((teacher) => {
+                        {this.state.currentClass ? 
+                        <option value={this.state.currentClass.teacherId}> { this.state.currentClass.teacher.firstName } {this.state.currentClass.teacher.lastName} </option>: ""}
+                        {this.props.freeTeachers.map((teacher) => {
                             return (
                                 <option value={teacher.id}> {teacher.firstName} {teacher.lastName} </option>
                             );
