@@ -43,7 +43,7 @@ export class TeacherForm extends React.Component {
             } else {
                 this.props.handleEdit(this.state.firstName,this.state.lastName,this.props.teacherId);
             }
-            history.push('/admin/teachers/');
+            history.push('/admin/teachers');
         }
     }
     validateInput = () => {
@@ -56,23 +56,24 @@ export class TeacherForm extends React.Component {
             inputErrors.firstName = "First name must contain from 3 to 60 characters"
             isValid = false;
         } else if(typeof this.state.firstName !== "undefined"){
-            if(!this.state.firstName.match(/^[a-zA-Z]+$/)){
+            if(!this.state.firstName.match(/^[a-zA-Z ]+$/)){
                isValid = false;
                inputErrors.firstName = "Only letters allowed";
             }        
-         }
-         if(!this.state.lastName){
+        }
+
+        if(!this.state.lastName){
             inputErrors.lastName = "Last name required"
             isValid = false
         } else if (this.state.lastName.length < 3 || this.state.lastName.length > 60){
             inputErrors.lastName = "Last name must contain from 3 to 60 characters"
             isValid = false;
         } else if(typeof this.state.lastName !== "undefined"){
-            if(!this.state.lastName.match(/^[a-zA-Z]+$/)){
+            if(!this.state.lastName.match(/^[a-zA-Z ]+$/)){
                isValid = false;
                inputErrors.lastName = "Only letters allowed";
             }        
-         }
+        }
         this.setState({inputErrors})
         return isValid;
     }
@@ -82,10 +83,10 @@ export class TeacherForm extends React.Component {
                 <form>
                     First name
                     <input type="text" name="firstName" onChange={this.handleChange} value={this.state.firstName}className="form-control" placeholder="First name"/>
-                    <p className="error">{this.state.inputErrors.firstName}</p>
+                    <p className="error">{this.state.inputErrors.firstName}{ this.props.errors ? this.props.errors : ""}</p>
                     Last name
                     <input type="text" name="lastName" onChange={this.handleChange} value={this.state.lastName} className="form-control" placeholder="Last name"/>
-                    <p className="error">{this.state.inputErrors.lastName}</p>
+                    <p className="error">{this.state.inputErrors.lastName} {this.props.errors ? this.props.errors : ""}</p>
                 </form>
                 <button type="button"  onClick={this.handleClick} className="btn btn-primary"> Save </button>
                 <Link to="/admin/teachers/"><button type="button"  className="btn btn-default">Cancel</button></Link>

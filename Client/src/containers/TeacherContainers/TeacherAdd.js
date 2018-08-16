@@ -10,6 +10,7 @@ export class TeacherAdd extends React.Component {
                 <h1> Adding Teacher </h1>
                 <TeacherForm 
                     handleAdd = {this.props.handleAdd}
+                    errors = {this.props.errors}
                 />
             </div>
         );
@@ -24,5 +25,10 @@ const mapDispatchToProps = (dispatch)=> {
         }
     }
 }
+const mapStateToProps = (state) => {
+    return {
+        errors: state.teacherReducer.errors
+    }
+}
 
-export default connect(null,mapDispatchToProps)(TeacherAdd);
+export default connect(mapStateToProps,mapDispatchToProps)(TeacherAdd);

@@ -1,4 +1,5 @@
 const models = require('../models');
+const { validationResult } = require('express-validator/check');
 
 exports.get = function (req,res){
     models.teachers.findAll().then(results => {

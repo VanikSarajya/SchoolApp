@@ -1,4 +1,5 @@
 const express = require('express');
+const expressValidator = require('express-validator');
 
 const adminRoute = require('./routes/adminRoute');
 const teacherRoute = require("./routes/teacherRoute");
@@ -19,7 +20,7 @@ app.use((req,res,next) => {
 	res.append('Access-Control-Allow-Headers', '*');
 	next();
 })
-
+app.use(expressValidator());
 app.use('/admin', adminRoute);
 app.use('/admin/teachers', tokenChecker, teacherRoute);
 app.use('/admin/classes', tokenChecker, classRoute);

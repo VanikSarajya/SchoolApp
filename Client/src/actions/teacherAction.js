@@ -8,7 +8,7 @@ export function deleteTeacher(teacher) {
         const {message} = response.data;
         dispatch({
             type: "DELETE_TEACHER",
-            message
+            message,
         })
         dispatch(getTeachers());
     }
@@ -60,10 +60,11 @@ export function clearCurrentTeacher(){
 export function addTeacher(firstName, lastName){
     return async (dispatch) => {
         const response = await axios.post(process.env.REACT_APP_SERVER_URL + '/admin/teachers/add', {firstName,lastName});
-        const {message} = response.data;
+        const {message, errors} = response.data;
         dispatch({
             type: "ADD_TEACHER",
             message,
+            errors
         })
         dispatch(getTeachers());
     }
