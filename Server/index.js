@@ -19,7 +19,6 @@ app.use((req,res,next) => {
 	res.append('Access-Control-Allow-Headers', '*');
 	next();
 })
-
 app.use('/admin', adminRoute);
 app.use('/admin/teachers', tokenChecker, teacherRoute);
 app.use('/admin/classes', tokenChecker, classRoute);

@@ -17,6 +17,21 @@ window.axios.interceptors.request.use(function(config) {
     return Promise.reject(err);
 });
 
+window.axios.interceptors.response.use(function (response) {
+    return response;
+}, function (error) {
+    if(error.response.status === 401)
+    {
+        localStorage.removeItem('user');
+        localStorage.removeItem('jwtToken');
+        if(window.location.pathname !== "/")
+        {
+            window.location.replace("/");
+        }
+        return Promise.reject(error);
+    }
+});
+
 ReactDOM.render(
     <Provider store={store}>
         <App />
