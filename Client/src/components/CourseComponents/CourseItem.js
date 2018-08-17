@@ -9,8 +9,8 @@ export class CourseItem extends React.Component {
                 <td>{this.props.course.name}</td>
                 <td>{this.props.course.class.name}</td>
                 <td>{this.props.course.teacher.firstName} {this.props.course.teacher.lastName} </td>
-                <td>{this.props.course.startingDate} - {this.props.course.endingDate}</td>
-                <td> {this.props.course.startingTime} - {this.props.course.enddingTime}</td>
+                <td>{this.props.course.startingDate} - <br /> {this.props.course.endingDate}</td>
+                <td> {this.props.course.startingTime.slice(0,5)} - {this.props.course.enddingTime.slice(0,5)}</td>
                 <td> 
                     <Link to={"/admin/courses/edit/"+ this.props.course.id }><button 
                         className="btn btn-primary"
