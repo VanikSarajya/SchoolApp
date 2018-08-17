@@ -83,10 +83,10 @@ export class TeacherForm extends React.Component {
                 <form>
                     First name
                     <input type="text" name="firstName" onChange={this.handleChange} value={this.state.firstName}className="form-control" placeholder="First name"/>
-                    <p className="error">{this.state.inputErrors.firstName}{ this.props.errors ? this.props.errors : ""}</p>
+                    <p className="error">{this.state.inputErrors.firstName}</p>
                     Last name
                     <input type="text" name="lastName" onChange={this.handleChange} value={this.state.lastName} className="form-control" placeholder="Last name"/>
-                    <p className="error">{this.state.inputErrors.lastName} {this.props.errors ? this.props.errors : ""}</p>
+                    <p className="error">{this.state.inputErrors.lastName}</p>
                 </form>
                 <button type="button"  onClick={this.handleClick} className="btn btn-primary"> Save </button>
                 <Link to="/admin/teachers/"><button type="button"  className="btn btn-default">Cancel</button></Link>

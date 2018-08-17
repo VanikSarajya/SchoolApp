@@ -3,7 +3,6 @@ const teacherInitialState = {
     freeTeachers:[],
     message : "",
     currentTeacher: null,
-    errors: []
 }
 
 export const teacherReducer = (state = teacherInitialState, action) => {
@@ -57,12 +56,11 @@ export const teacherReducer = (state = teacherInitialState, action) => {
             return state;
         }
         case "ADD_TEACHER":{
-            const {message, errors} = action;
+            const {message} = action;
     
             state ={
                 ...state,
                 message,
-                errors
             }
             return state;
         }    

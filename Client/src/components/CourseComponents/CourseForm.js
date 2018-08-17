@@ -104,8 +104,7 @@ export class CourseForm extends React.Component {
         if(!this.state.enddingTime){
             isValid = false;
             inputErrors.enddingTime = "Ending time required";
-        }
-        if(this.state.enddingTime > "18:00:00" || this.state.startingTime < "08:00:00"){
+        } else if(this.state.enddingTime > "18:00:00" || this.state.startingTime < "08:00:00"){
             isValid = false;
             inputErrors.startingTime = "We start our working day at 8:05 AM and end at 6:00 PM";
             inputErrors.enddingTime = "We start our working day at 8:05 AM and end at 6:00 PM";
